@@ -1,4 +1,1 @@
-# project_team_2
-project εισαγωγή στους υπολογιστές ομάδα 2 upatras
-OK
-ok
+# Data Base of Senior Thesis of University of Patras, HMTY (Project)
