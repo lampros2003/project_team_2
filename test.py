@@ -1,2 +1,0 @@
-print('go')
-print('test')
