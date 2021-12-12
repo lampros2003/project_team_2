@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.constants import END
 from DATABASE1 import *
 
 #Η κλαση μπαρα παιρνει ενα tk.Tk() object και το κανει παραθυρο αναζητησης
@@ -21,8 +22,9 @@ class bara():
         self.ent.grid(row=1,column=1)
         self.listbo = tk.Listbox(self.w,)
         def display(*args):#εκτυπωνει το περιεχόμενο της μπαρας και δείχνει την λίστα
-            print(args)
+            
             print(str(var.get()))
+            self.listbo.delete(0,END)
             searchreturn = search(str(var.get()))+[""]*10
             for i in searchreturn:
                 self.listbo.insert(searchreturn.index(i),i)
