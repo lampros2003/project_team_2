@@ -15,8 +15,12 @@ class bara():
     
     def draw(self):#το γραφικό περιβάλλων,ν γίνει πιο ευπαρουσίαστο
         global var
+        self.w.config(bg= 'white')
+        self.w.geometry('400x300')
         var = tk.StringVar(self.w)#το κείμενο μεσα στην μπαρα ορίζεται ως μεταβλητη var (οχι τελικό ονομα)
-        self.lab1 = tk.Label(self.w, text = 'Γράψε δίπλα για αναζήτηση' )
+        
+        
+        self.lab1 = tk.Label(self.w, text = 'Γράψε δίπλα για αναζήτηση' ,bg='blue',fg='white')
         self.lab1.grid(row=1,column=0)
         self.ent = tk.Entry(self.w, textvariable= var)
         self.ent.grid(row=1,column=1)
@@ -25,10 +29,13 @@ class bara():
             
             print(str(var.get()))
             self.listbo.delete(0,END)
-            searchreturn = search(str(var.get()))+[""]*10
-            for i in searchreturn:
-                self.listbo.insert(searchreturn.index(i),i)
-            self.listbo.grid(row=1,column=2)
+            if not str(var.get()) == '':
+                searchreturn = search(str(var.get()))+[""]*10
+                for i in searchreturn:
+                    self.listbo.insert(searchreturn.index(i),i)
+                self.listbo.grid(row=2,column=1)
+            else :pass
+            
 
         var.trace_add('write', display)#κανει trace το περιεχώμενο της μπαρας
         
