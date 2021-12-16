@@ -43,4 +43,20 @@ def search(z):
         con.commit()
         print("--------------------"*2)
         return result
+def searchname(z):
+        result = c.execute("SELECT * FROM employees WHERE firstname LIKE '%{}%'".format(z)).fetchall()
+        con.commit()
+        print("--------------------"*2)
+        return result
+        
+def searchsurname(z):
+        result = c.execute("SELECT * FROM employees WHERE lastname LIKE '%{}%'".format(z)).fetchall()
+        con.commit()
+        print("--------------------"*2)
+        return result
+def searchcash(z):
+        result = c.execute("SELECT * FROM employees WHERE pay LIKE '%{}%'".format(z)).fetchall()
+        con.commit()
+        print("--------------------"*2)
+        return result
 
