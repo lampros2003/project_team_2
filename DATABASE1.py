@@ -59,4 +59,6 @@ def searchcash(z):
         con.commit()
         print("--------------------"*2)
         return result
-
+print(searchname('100'))
+print(searchcash('100'))
+print(searchsurname('a'))
