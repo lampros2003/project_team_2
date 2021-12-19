@@ -33,7 +33,7 @@ class bara():
                 searchreturn = search(str(var.get()))
                 for i in searchreturn:
                     self.listbo.insert(searchreturn.index(i),i)
-                    print(type(i))
+                    print(type(i))#check remove 
                     print(i)
                 self.listbo.grid(row=2,column=1)
             else :pass
