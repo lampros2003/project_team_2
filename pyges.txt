@@ -1,0 +1,3 @@
+pyges lampros:
+Θεωρεία πάνω στην μεθοδο .pack():https://www.geeksforgeeks.org/python-pack-method-in-tkinter/
+Δομή προγραμματος Python για αντικειμενοστρεφη προγραμματισμό:https://docs.python-guide.org/writing/structure/

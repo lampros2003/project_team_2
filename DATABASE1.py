@@ -41,24 +41,21 @@ def search(z):
         result = result + c.execute("SELECT * FROM employees WHERE lastname LIKE '%{}%' and not firstname LIKE '%{}%'".format(z,z)).fetchall()
         result = result + c.execute("SELECT * FROM employees WHERE pay LIKE '%{}%' and not firstname LIKE'%{}%' and not lastname LIKE '%{}%'".format(z,z,z)).fetchall()
         con.commit()
-        print("--------------------"*2)
+        
         return result
 def searchname(z):
         result = c.execute("SELECT * FROM employees WHERE firstname LIKE '%{}%'".format(z)).fetchall()
         con.commit()
-        print("--------------------"*2)
+        
         return result
         
 def searchsurname(z):
         result = c.execute("SELECT * FROM employees WHERE lastname LIKE '%{}%'".format(z)).fetchall()
         con.commit()
-        print("--------------------"*2)
+        
         return result
 def searchcash(z):
         result = c.execute("SELECT * FROM employees WHERE pay LIKE '%{}%'".format(z)).fetchall()
         con.commit()
-        print("--------------------"*2)
+        
         return result
-print(searchname('100'))
-print(searchcash('100'))
-print(searchsurname('a'))
