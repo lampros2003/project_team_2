@@ -6,6 +6,7 @@ from DATABASE1 import *
 #Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
 class bara():
     global var
+    
      
     truesearch = search
     def searchbynamecall(self) :
@@ -19,12 +20,14 @@ class bara():
         
         self.w.title("Αναζήτηση")
         self.draw() 
+    def makeorder():
+        pass
         
     
     def draw(self):#το γραφικό περιβάλλων,ν γίνει πιο ευπαρουσίαστο
         global var
         global truesearch
-        
+        self.searchbyallcall()
         self.w.config(bg= 'white')
         self.w.geometry('400x300')
         var = tk.StringVar(self.w)#το κείμενο μεσα στην μπαρα ορίζεται ως μεταβλητη var (οχι τελικό ονομα)
@@ -33,7 +36,7 @@ class bara():
         
         self.lab1 = tk.Label(self.frame, text = 'Γράψε απο κάτω για αναζήτηση' ,bg='blue',fg='white',)
         
-        self.searchbyname = tk.Button(self.frame ,text= 'όνομα συγγραφέα',background='blue',fg='white',command=self.searchbynamecall)
+        self.searchbyname = tk.Button(self.frame ,text= 'όνομα συγγραφέα',background='blue',fg='white',command=self.searchbynamecall)#οι διαφορετικες μεθοδοι αναζητησης
         self.searchbytitle = tk.Button(self.frame, text= 'τίτλο',background='blue',fg='white',command= self.searchbytitlecall)
         self.searchbyall = tk.Button(self.frame,text = 'όλα τα στοιχεία',background='blue',fg='white',command= self.searchbyallcall)
         self.searchbyall.pack(side= RIGHT , fill = BOTH, expand = True)
