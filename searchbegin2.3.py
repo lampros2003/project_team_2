@@ -22,12 +22,15 @@ class bara():
         self.draw() 
     def makeorder(self):
         if self.makeordervar == 'date':
+
             pass
         if self.makeordervar == 'alpha':
+            self.searchreturn = self.truesearch(str(var.get()))
             pass
         if self.makeordervar == 'mostlike':
-            pass
-        pass
+            return self.truesearch(str(var.get()))
+
+        
         
     
     def draw(self):#το γραφικό περιβάλλων,ν γίνει πιο ευπαρουσίαστο
@@ -60,7 +63,7 @@ class bara():
             
             self.listbo.delete(0,END)
             if not str(var.get()) == '':
-                searchreturn = self.truesearch(str(var.get()))
+                searchreturn = self.makeorder()
                 for i in searchreturn:
                     self.listbo.insert(searchreturn.index(i),i)
                     
