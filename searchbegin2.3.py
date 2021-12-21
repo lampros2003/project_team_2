@@ -6,7 +6,7 @@ from DATABASE1 import *
 #Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
 class bara():
     global var
-    
+    makeordervar = 'mostlike'
      
     truesearch = search
     def searchbynamecall(self) :
@@ -20,7 +20,13 @@ class bara():
         
         self.w.title("Αναζήτηση")
         self.draw() 
-    def makeorder():
+    def makeorder(self):
+        if self.makeordervar == 'date':
+            pass
+        if self.makeordervar == 'alpha':
+            pass
+        if self.makeordervar == 'mostlike':
+            pass
         pass
         
     
