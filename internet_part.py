@@ -36,23 +36,24 @@ def secondary_pages(s):
     return bases
 def main_pages():
     count=0
-    while True:
-        url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(count))
-        info=url.read()
-        soup=BeautifulSoup(info,'html.parser')
-        table=soup.find('table',{'class':'table'})
-        i=0
-        for tag in table.find_all('tr'):
-            if i==0:
-                i+=1
-                continue
-            datalist=list(tag.children)
-            for link in datalist[1].find_all('a', href=True):
-                s='https://nemertes.library.upatras.gr'+link['href']
-                pfile=secondary_pages(s)
-                Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),kwords,trans_kwords,pfile[6])
-        count+=20
-
+    try:
+        while True:
+            url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(count))
+            info=url.read()
+            soup=BeautifulSoup(info,'html.parser')
+            table=soup.find('table',{'class':'table'})
+            i=0
+            for tag in table.find_all('tr'):
+                if i==0:
+                    i+=1
+                    continue
+                datalist=list(tag.children)
+                for link in datalist[1].find_all('a', href=True):
+                    s='https://nemertes.library.upatras.gr'+link['href']
+                    pfile=secondary_pages(s)
+                    Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),kwords,trans_kwords,pfile[6])
+            count+=20
+    except:print("Completed")
 main_pages()
         
 
