@@ -22,11 +22,11 @@ class bara():
         self.draw() 
     def makeorder(self):
         if self.makeordervar == 'date':
-
-            pass
+            return  self.truesearch(str(var.get())).sort(lambda x: x[2])
+            
         if self.makeordervar == 'alpha':
-            self.searchreturn = self.truesearch(str(var.get()))
-            pass
+            return self.truesearch(str(var.get())).sort()
+            
         if self.makeordervar == 'mostlike':
             return self.truesearch(str(var.get()))
 
@@ -48,6 +48,8 @@ class bara():
         self.searchbyname = tk.Button(self.frame ,text= 'όνομα συγγραφέα',background='blue',fg='white',command=self.searchbynamecall)#οι διαφορετικες μεθοδοι αναζητησης
         self.searchbytitle = tk.Button(self.frame, text= 'τίτλο',background='blue',fg='white',command= self.searchbytitlecall)
         self.searchbyall = tk.Button(self.frame,text = 'όλα τα στοιχεία',background='blue',fg='white',command= self.searchbyallcall)
+        self.ordermenu = tk.Menu()
+        
         self.searchbyall.pack(side= RIGHT , fill = BOTH, expand = True)
         self.searchbyname.pack(side= RIGHT , fill = BOTH, expand = True)
         self.searchbytitle.pack(side= RIGHT , fill = BOTH, expand = True)
