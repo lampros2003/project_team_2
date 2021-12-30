@@ -22,11 +22,20 @@ class Student():
     def display_count(self):
         print(count)
 def secondary_pages(s):
+    global kwrdseng
     bases={}
     Url=urlopen(s)
     info=Url.read()
     soup=BeautifulSoup(info,'html.parser')
+    kwrdseng = soup.find_all(attrs={"name" : "DC.subject" , 'xml:lang' :"el"})
+    
+    output = kwrds[0]['content'.split]
+    print(type(kwrdseng))
+    kwrds = soup.find_all(attrs={"name" : "citation_keywords"})
+    output = kwrds[0]['content'.split]
+    print(output)
     tables=soup.find('table',{'class':'table'})
+
     i=0
     for tag in tables.find_all('tr'):
         datalist=list(tag.children)
@@ -53,8 +62,10 @@ def main_pages():
                     pfile=secondary_pages(s)
                     Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),kwords,trans_kwords,pfile[6])
             count+=20
-    except:print("Completed")
+    except:print("Completed") 
+
 main_pages()
+print(kwrdseng)
         
 
 #Έχω θέμα με το πως χειρίζομαι τα keywords , το πρόβλημα ειναι

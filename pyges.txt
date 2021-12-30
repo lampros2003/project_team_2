@@ -2,3 +2,5 @@ pyges lampros:
 Θεωρεία πάνω στην μεθοδο .pack():https://www.geeksforgeeks.org/python-pack-method-in-tkinter/
 Δομή προγραμματος Python για αντικειμενοστρεφη προγραμματισμό:https://docs.python-guide.org/writing/structure/
 πως να κανω sort το searchreturn αλφαβητικά(το επέκτεινα και για sort βασει αυξοντα αριθμού) :https://www.tutorialspoint.com/python-program-to-sort-a-list-of-tuples-alphabetically
+https://pytutorial.com/beautifulsoup-attribute
+https://stackoverflow.com/questions/2612548/extracting-an-attribute-value-with-beautifulsoup
