@@ -22,7 +22,7 @@ class Student():
     def display_count(self):
         print(self.count)
     def __repr__(self) :
-        return self.writer + ' '+self.title +' '+self.trans_title +' '+self.date + ' '+self.kwords +' '+self.trans_kwords +' ' +self.summary
+        return self.writer + '/ '+self.title +'/ '+self.trans_title +'/ '+self.date + '/ '+self.kwords +'/ '+self.trans_kwords +'/ ' +self.summary
 def secondary_pages(s):
     bases={}
     Url=urlopen(s)
