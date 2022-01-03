@@ -22,9 +22,15 @@ class Student():
     def display_count(self):
         print(self.count)
     def return_contents(self):
-        return self.writer + '/ '+self.title +'/ '+self.trans_title +'/ '+self.date + '/ '+self.kwords +'/ '+self.trans_kwords +'/ ' +self.summary
+        return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary
     def __repr__(self) :
-        return self.writer + '/ '+self.title +'/ '+self.trans_title +'/ '+self.date + '/ '+self.kwords +'/ '+self.trans_kwords +'/ ' +self.summary
+        return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary
+def writefiles():
+    f=open('infom.txt','w')
+    for i in stulist:
+        p=i.return_contents()
+        f.write(p+'^?^')
+    f.close()
 def secondary_pages(s):
     bases={}
     Url=urlopen(s)
@@ -65,8 +71,4 @@ def main_pages():
                 break
     except:print("Completed")
 main_pages()
-f=open('infom.txt','w')
-for i in stulist:
-    p=i.return_contents()
-    f.write(p+2*'\n')
-f.close()
+writefiles()
