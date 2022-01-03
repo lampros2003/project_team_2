@@ -18,33 +18,38 @@ class Student():
         self.kwords=kwords
         self.trans_kwords=trans_kwords
         self.summary=summary
-        count+=1
+        self.count+=1
     def display_count(self):
-        print(count)
+        print(self.count)
+    def return_contents(self):
+        return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary
+    def __repr__(self) :
+        return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary
+def writefiles():
+    f=open('infom.txt','w')
+    for i in stulist:
+        p=i.return_contents()
+        f.write(p+'^?^')
+    f.close()
 def secondary_pages(s):
-    global kwrdseng
     bases={}
     Url=urlopen(s)
     info=Url.read()
     soup=BeautifulSoup(info,'html.parser')
-    kwrdseng = soup.find_all(attrs={"name" : "DC.subject" , 'xml:lang' :"el"})
-    
-    output = kwrds[0]['content'.split]
-    print(type(kwrdseng))
-    kwrds = soup.find_all(attrs={"name" : "citation_keywords"})
-    output = kwrds[0]['content'.split]
-    print(output)
     tables=soup.find('table',{'class':'table'})
-
     i=0
     for tag in tables.find_all('tr'):
         datalist=list(tag.children)
-        bases[i]=(datalist[1].get_text())
+        bases[i]=(datalist[1].get_text(" "))
         i+=1
     #download_pdf(soup,bases[2])
     return bases
+
 def main_pages():
     count=0
+    global stulist
+    stulist = []
+    
     try:
         while True:
             url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(count))
@@ -60,16 +65,10 @@ def main_pages():
                 for link in datalist[1].find_all('a', href=True):
                     s='https://nemertes.library.upatras.gr'+link['href']
                     pfile=secondary_pages(s)
-                    Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),kwords,trans_kwords,pfile[6])
+                    stulist.append(Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),pfile[3], pfile[4],pfile[6]))
             count+=20
-    except:print("Completed") 
-
+            if count == 40:
+                break
+    except:print("Completed")
 main_pages()
-print(kwrdseng)
-        
-
-#Έχω θέμα με το πως χειρίζομαι τα keywords , το πρόβλημα ειναι
-#πως για να τα κάνω σπλιτ πρέπει να τα κάνω string αλλά όταν γίνουν string δεν μπορώ να βγάλω τα έξτρα του http
-            
-        
-        
+writefiles()
