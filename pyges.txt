@@ -4,3 +4,5 @@ pyges lampros:
 πως να κανω sort το searchreturn αλφαβητικά(το επέκτεινα και για sort βασει αυξοντα αριθμού) :https://www.tutorialspoint.com/python-program-to-sort-a-list-of-tuples-alphabetically
 https://pytutorial.com/beautifulsoup-attribute
 https://stackoverflow.com/questions/2612548/extracting-an-attribute-value-with-beautifulsoup
+https://www.geeksforgeeks.org/how-to-bind-multiple-commands-to-tkinter-button/
+https://www.delftstack.com/howto/python/sort-list-of-lists-in-python/
