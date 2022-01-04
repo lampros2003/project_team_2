@@ -1,61 +1,60 @@
 import sqlite3
+from internet_part import *
 from unidecode import unidecode
-class Worker():#κλαση που θα βαλουμε στη δοκιμαστικη λιστα
-    def __init__(self,first,last,pay):
-        self.first = first
-        self.last = last
-        self.pay = pay
-x=[]
-x.append(Worker('elena','rodrigez',10000))
-x.append(Worker("jane","five",400000))
-x.append(Worker('merry','onona',50000))
-x.append(Worker('Έδουάρδος','katsos',100000))
-x.append(Worker('john','janesan',50000))
-x.append(Worker('alpha','esperanza',10000))
-x.append(Worker('elza','zoro',37000)) 
-x.append(Worker('anna','three',10000))#τα στοιχεια που θα μπουν στη λιστα
-         
-con=sqlite3.connect(':memory:') #database στην ram
+
+download = True
+
+con=sqlite3.connect('work.db') #database που απηθηκεύουμε σε αρχειο
 c = con.cursor()
-c.execute('pragma encoding=utf8')
 
-c.execute("""CREATE TABLE employees (
-        firstname text,
-        lastname text,
-        pay integer
-        )""")#δημιουργια database με τρεις κατηγοριες
+if download :#  αν θελει να κατεβασει ξανα απο το ιντερνετ
+    main_pages()
+try:
+    c.execute("""CREATE TABLE work (
+		name text,
+		title text,
+		trans_title text,
+		date text,
+		kwords text,
+		trans_kwords text
+		)""")#δημιουργια database με εξι κατηγοριες
 
 
-for i in range(len(x)):
-    c.execute("INSERT INTO employees VALUES (?,?,?)",(x[i].first,x[i].last,x[i].pay))#είσαγουμε τα στοιχεια στο database
+
+
+
+    for i in range(len(x)):
+        c.execute("INSERT INTO work VALUES (?,?,?,?,?,?)",(x[i].writer,x[i].title,x[i].trans_title,x[i].date,x[i].kwords,x[i].trans_kwords))#είσαγουμε τα στοιχεια στο database
+except:
+    pass
 
 con.commit()
 
 def elements():
-        allofthem = c.execute("SELECT COUNT(lastname) FROM employees").fetchone()
+        allofthem = c.execute("SELECT COUNT(name) FROM work").fetchone()
         string = str(allofthem[0])+" elements availabe"#κοιταει ποσα στοιχεια εχει
         return string
 
 def search(z):
-        result = c.execute("SELECT * FROM employees WHERE firstname LIKE '%{}%' COLLATE UTF8_GENERAL_CI_AI".format(unidecode(z))).fetchall()
-        result = result + c.execute("SELECT * FROM employees WHERE lastname LIKE '%{}%' and not firstname LIKE '%{}%' COLLATE UTF8_GENERAL_CI_AI".format(unidecode(z),unidecode(z))).fetchall()
-        result = result + c.execute("SELECT * FROM employees WHERE pay LIKE '%{}%' and not firstname LIKE'%{}%' and not lastname LIKE '%{}%' COLLATE UTF8_GENERAL_CI_AI".format(unidecode(z),unidecode(z),unidecode(z))).fetchall()
+        z = unidecode(z)
+        result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' or trans_title LIKE'%{}%' or date LIKE'%{}%' or trans_kwords LIKE'%{}%' COLLATE NOCASE ".format(z,z,z,z)).fetchall()
         con.commit()
-        
         return result
+
 def searchname(z):
-        result = c.execute("SELECT * FROM employees WHERE firstname LIKE '%{}%' COLLATE NOCASE".format(unidecode(z))).fetchall()
+        z = unidecode(z)
+        result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
         con.commit()
-        
         return result
         
-def searchsurname(z):
-        result = c.execute("SELECT * FROM employees WHERE lastname LIKE '%{}%' COLLATE NOCASE".format(unidecode(z))).fetchall()
+def searchtitle(z):
+        z = unidecode(z)
+        result = c.execute("SELECT name,trans_title,date FROM work WHERE trans_title LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
         con.commit()
-        
         return result
-def searchcash(z):
-        result = c.execute("SELECT * FROM employees WHERE pay LIKE '%{}%' COLLATE NOCASE".format(unidecode(z))).fetchall()
+    
+def searchdate(z):
+        z = unidecode(z)
+        result = c.execute("SELECT name,trans_title,date FROM work WHERE date LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
         con.commit()
-        
         return result
