@@ -1,5 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+x=[]
+
 def download_pdf(soup,person):
     links=soup.find_all('a',{'target':'_blank'})
     for link in links:
@@ -25,12 +27,7 @@ class Student():
         return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary
     def __repr__(self) :
         return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary
-def writefiles():
-    f=open('infom.txt','w')
-    for i in stulist:
-        p=i.return_contents()
-        f.write(p+'^?^')
-    f.close()
+    
 def secondary_pages(s):
     bases={}
     Url=urlopen(s)
@@ -68,7 +65,9 @@ def main_pages():
                     stulist.append(Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),pfile[3], pfile[4],pfile[6]))
             count+=20
             if count == 40:
+                global x
+                x = stulist
                 break
     except:print("Completed")
-main_pages()
-writefiles()
+
+if __name__ =="__main__":main_pages()
