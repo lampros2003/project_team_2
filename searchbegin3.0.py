@@ -15,7 +15,7 @@ class bara():
         self.truesearch= searchname
         
     def searchbytitlecall(self):
-        self.truesearch = searchsurname
+        self.truesearch = searchtitle
         
     def searchbyallcall(self):
         self.truesearch = search
