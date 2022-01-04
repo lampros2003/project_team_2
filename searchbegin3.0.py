@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter.constants import BOTH, BOTTOM, END, LEFT, RIGHT, TOP, X
 from DATABASE1 import *
 from operator import itemgetter
+from unidecode import unidecode
 
 #Η κλαση μπαρα παιρνει ενα tk.Tk() object και το κανει παραθυρο αναζητησης
 #Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
@@ -27,11 +28,11 @@ class bara():
     def makeorder(self):
         if str(makeordervar.get()) == 'date':
             
-            return sorted(self.truesearch(str(var.get())),key = itemgetter(2),reverse = True)
+            return sorted(self.truesearch((str(var.get()))),key = itemgetter(2),reverse = True)
         
             
         if str(makeordervar.get()) == 'alpha':
-            return sorted(self.truesearch(str(var.get())))
+            return sorted((self.truesearch(str(var.get()))))
             
         if str(makeordervar.get()) == 'mostlike':
             return self.truesearch(str(var.get()))
