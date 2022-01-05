@@ -46,6 +46,8 @@ def main_pages():
     count=0
     global stulist
     stulist = []
+    global x
+    x = stulist
     
     try:
         while True:
@@ -64,10 +66,11 @@ def main_pages():
                     pfile=secondary_pages(s)
                     stulist.append(Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),pfile[3], pfile[4],pfile[6]))
             count+=20
-            if count == 40:
-                global x
-                x = stulist
-                break
-    except:print("Completed")
+            
+            
+            
+    except:
+        print("Completed")
+        
 
 if __name__ =="__main__":main_pages()

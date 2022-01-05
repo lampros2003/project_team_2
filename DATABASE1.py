@@ -37,7 +37,7 @@ def elements():
 
 def search(z):
         z = unidecode(z)
-        result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' or trans_title LIKE'%{}%' or date LIKE'%{}%' or trans_kwords LIKE'%{}%' COLLATE NOCASE ".format(z,z,z,z)).fetchall()
+        result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' or trans_title LIKE'%{}%' or date LIKE'%{}%' or trans_kwords LIKE'%{}% COLLATE NOCASE'  ".format(z,z,z,z)).fetchall()
         con.commit()
         return result
 

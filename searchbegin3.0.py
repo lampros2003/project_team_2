@@ -45,8 +45,7 @@ class bara():
         global truesearch
         global makeordervar
         global display
-        def dummy(*args):
-            pass
+        
         makeordervar = tk.StringVar(self.w)
         makeordervar.set('mostlike')
         self.searchbyallcall()
