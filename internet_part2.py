@@ -68,6 +68,7 @@ def main_pages():
             if count == 40:
                 global x
                 x = stulist
+                print(x)
                 break
     except:print("Completed")
     
