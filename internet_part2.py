@@ -2,6 +2,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 download = True
+error = False
 
 def download_pdf(soup,person):
     links=soup.find_all('a',{'target':'_blank'})
@@ -69,6 +70,7 @@ def main_pages():
             if count == 40:
                 break
     except:
-        print("Completed")
+        global error
+        error = True
         
 if download: main_pages()
