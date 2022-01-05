@@ -1,6 +1,6 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-x=[]
+
 
 def download_pdf(soup):
     links=soup.find_all('a',{'target':'_blank'})
@@ -22,9 +22,9 @@ class Student():
     def display_count(self):
         print(self.count)
     def return_contents(self):
-        return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary+' / '+self.url
+        return self.writer + ' , '+self.title +' , '+self.trans_title +' , '+self.date + ' , '+self.kwords +' , '+self.trans_kwords +' , ' +self.summary+' , '+self.url
     def __repr__(self) :
-        return self.writer + ' / '+self.title +' / '+self.trans_title +' / '+self.date + ' / '+self.kwords +' / '+self.trans_kwords +' / ' +self.summary+' / '+self.url
+        return self.writer + ' , '+self.title +' , '+self.trans_title +' , '+self.date + ' , '+self.kwords +' , '+self.trans_kwords +' , ' +self.summary+' , '+self.url
     
 def secondary_pages(s):
     bases={}
@@ -42,10 +42,9 @@ def secondary_pages(s):
 
 def main_pages():
     count=0
-    global stulist
-    stulist = []
     global x
-    x = stulist
+    x = []
+
     
     try:
         while True:
@@ -62,7 +61,7 @@ def main_pages():
                 for link in datalist[1].find_all('a', href=True):
                     s='https://nemertes.library.upatras.gr'+link['href']
                     pfile=secondary_pages(s)
-                    stulist.append(Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),pfile[3], pfile[4],pfile[6],pfile[7]))
+                    x.append(Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),pfile[3], pfile[4],pfile[6],pfile[7]))
             count+=20
             
             
