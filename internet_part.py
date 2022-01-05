@@ -7,6 +7,7 @@ def download_pdf(soup):
     for link in links:
         if '.pdf' in link.get_text():
             url='https://nemertes.library.upatras.gr/'+link['href']
+            return url
 class Student():
     count=0
     def __init__(self,writer,title,trans_title,date,kwords,trans_kwords,summary):
