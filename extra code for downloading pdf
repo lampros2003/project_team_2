@@ -1,0 +1,4 @@
+url=urlopen(link_of_file)
+file=open('{}.pdf'.format(person),'wb')
+file.write(url.read())
+file.close()
