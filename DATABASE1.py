@@ -5,7 +5,7 @@ from unidecode import unidecode
 con=sqlite3.connect('work.db') #database που απηθηκεύουμε σε αρχειο
 c = con.cursor()
 
-if download:
+if download and not error:
     try:
         c.execute('DROP TABLE work;')
     except:
