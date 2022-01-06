@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-download = True
+download = False
 error = False
 
 def download_pdf(soup,person):
@@ -66,7 +66,7 @@ def main_pages():
                     s='https://nemertes.library.upatras.gr'+link['href']
                     pfile=secondary_pages(s)
                     x.append(Student(pfile[2],pfile[0],pfile[1],datalist[0].get_text(),pfile[3], pfile[4],pfile[6]))
-            count+=20
+            
             
             
     except:

@@ -9,7 +9,7 @@ import locale
 #Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
 class bara():
     global var
-    locale.setlocale(locale.LC_ALL, 'en_US')
+    
     
      
     truesearch = search
@@ -30,7 +30,7 @@ class bara():
     def makeorder(self):
         if str(makeordervar.get()) == 'date reverse':
             
-            return sorted(self.truesearch((str(var.get()))),reverse= True)
+            return list(reversed(self.truesearch((str(var.get())))))
         
             
         if str(makeordervar.get()) == 'alpha writer':
@@ -96,7 +96,7 @@ class bara():
                     
                 self.listbo.pack(side= BOTTOM , fill = BOTH, expand = True)
             else :pass
-        self.ordermenu =  tk.OptionMenu(self.frame2, makeordervar, "mostlike", "alpha writer","alpha title", "date reverse",command= display )
+        self.ordermenu =  tk.OptionMenu(self.frame2, makeordervar, "date", "alpha writer","alpha title", "date reverse",command= display )
         self.ordermenu.config(bg = 'blue')
         self.ordermenu.pack(side= RIGHT , fill = X, expand = False)
 
