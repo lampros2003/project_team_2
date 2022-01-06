@@ -49,4 +49,5 @@ def searchtitle(z):
         result = c.execute("SELECT name,trans_title,date FROM work WHERE trans_title LIKE '%{}%' or title LIKE '%{}%' COLLATE NOCASE".format(z,z)).fetchall()
         con.commit()
         return result
+print(elements())
     

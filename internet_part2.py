@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-download = False
+download = True
 error = False
 
 def download_pdf(soup,person):

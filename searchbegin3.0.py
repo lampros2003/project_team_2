@@ -28,16 +28,19 @@ class bara():
         self.w.title("Αναζήτηση")
         self.draw() 
     def makeorder(self):
-        if str(makeordervar.get()) == 'date':
+        if str(makeordervar.get()) == 'date reverse':
             
-            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[2], '%d-%b-%Y'),reverse = True)
+            return sorted(self.truesearch((str(var.get()))),reverse= True)
         
             
-        if str(makeordervar.get()) == 'alpha':
+        if str(makeordervar.get()) == 'alpha writer':
             return sorted((self.truesearch(str(var.get()))))
             
-        if str(makeordervar.get()) == 'mostlike':
+        if str(makeordervar.get()) == 'date':
             return self.truesearch(str(var.get()))
+        if str(makeordervar.get()) == 'alpha title':
+            return  sorted(self.truesearch((str(var.get()))),key = lambda x: x[1])
+
 
         
         
@@ -49,10 +52,10 @@ class bara():
         global display
         
         makeordervar = tk.StringVar(self.w)
-        makeordervar.set('mostlike')
+        makeordervar.set('date')
         self.searchbyallcall()
         self.w.config(bg= 'white')
-        self.w.geometry('400x700')
+        self.w.geometry('1000x1000')
         var = tk.StringVar(self.w)#το κείμενο μεσα στην μπαρα ορίζεται ως μεταβλητη var (οχι τελικό ονομα)
         self.frame = tk.Frame(bg = 'Blue')
         self.frame.pack(side= TOP , fill = BOTH, expand = False)
@@ -93,7 +96,7 @@ class bara():
                     
                 self.listbo.pack(side= BOTTOM , fill = BOTH, expand = True)
             else :pass
-        self.ordermenu =  tk.OptionMenu(self.frame2, makeordervar, "mostlike", "alpha", "date",command= display )
+        self.ordermenu =  tk.OptionMenu(self.frame2, makeordervar, "mostlike", "alpha writer","alpha title", "date reverse",command= display )
         self.ordermenu.config(bg = 'blue')
         self.ordermenu.pack(side= RIGHT , fill = X, expand = False)
 
