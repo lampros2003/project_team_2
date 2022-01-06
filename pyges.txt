@@ -6,3 +6,6 @@ https://pytutorial.com/beautifulsoup-attribute
 https://stackoverflow.com/questions/2612548/extracting-an-attribute-value-with-beautifulsoup
 https://www.geeksforgeeks.org/how-to-bind-multiple-commands-to-tkinter-button/
 https://www.delftstack.com/howto/python/sort-list-of-lists-in-python/
+https://appdividend.com/2020/10/27/how-to-convert-python-string-to-date/#:~:text=To%20convert%20a%20Python%20string%20to%20datetime%2C%20use,representation%20of%20the%E2%80%8B%20date%2Ftime%20to%20a%20date%20object.
+https://www.geeksforgeeks.org/convert-string-to-datetime-in-python-with-timezone/
+https://docs.python.org/3/library/locale.html#locale.setlocale

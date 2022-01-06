@@ -3,11 +3,13 @@ from tkinter.constants import BOTH, BOTTOM, END, LEFT, RIGHT, TOP, X
 from DATABASE1 import *
 from operator import itemgetter
 from unidecode import unidecode
-
+from datetime import *
+import locale
 #Η κλαση μπαρα παιρνει ενα tk.Tk() object και το κανει παραθυρο αναζητησης
 #Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
 class bara():
     global var
+    locale.setlocale(locale.LC_ALL, 'en_US')
     
      
     truesearch = search
@@ -28,7 +30,7 @@ class bara():
     def makeorder(self):
         if str(makeordervar.get()) == 'date':
             
-            return sorted(self.truesearch((str(var.get()))),key = itemgetter(2),reverse = True)
+            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[2], '%d-%b-%Y'),reverse = True)
         
             
         if str(makeordervar.get()) == 'alpha':
