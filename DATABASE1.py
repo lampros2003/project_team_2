@@ -64,7 +64,7 @@ def searchname(z):
         z = unidecode(z)
         result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
         con.commit()
-        amount = len(reult)
+        amount = len(result)
         return result
 
         
