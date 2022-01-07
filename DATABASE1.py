@@ -1,5 +1,5 @@
 import sqlite3
-from internet_part2 import *
+from internet_part import *
 from unidecode import unidecode
 
 amount = 0
