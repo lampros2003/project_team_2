@@ -2,17 +2,30 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import ssl
 import certifi
+import os
+localize_pdf = True
+download = True
+error = False
+save_path = '/nemertespdfs'
 ssl._create_default_https_context = ssl._create_unverified_context
-
+if not os.path.exists(save_path):
+    os.mkdir(save_path)
 def download_pdf(soup):
     links=soup.find_all('a',{'target':'_blank'})
     for link in links:
         if '.pdf' in link.get_text():
             url='https://nemertes.library.upatras.gr/'+link['href']
             return url
+
+def download_file(download_url, filename):
+    response = urlopen(download_url)    
+    file = open(filename + ".pdf", 'wb')
+    file.write(response.read())
+    file.close()
 class Student():
     count=0
-    def __init__(self,title='',trans_title='',writer='',kwords='',trans_kwords='',summary='',trans_summary='',url='',date=''):
+    def __init__(self,stucount,title='',trans_title='',writer='',kwords='',trans_kwords='',summary='',trans_summary='',url='',date=''):
+        self.stucount = stucount
         self.writer=writer
         self.title=title
         self.trans_title=trans_title
@@ -47,6 +60,12 @@ def secondary_pages(s):
     for i in P:
         bases[i]=''
     bases['pdf']=download_pdf(soup)
+    if localize_pdf:
+        completeName = os.path.join(save_path, str(Student.count))
+        
+        print('at work')
+        download_file(bases['pdf'],completeName)
+
     return bases
 
 def main_pages():
@@ -69,9 +88,14 @@ def main_pages():
                     short_link=link['href'][13:]
                     s='http://hdl.handle.net'+short_link
                     bases=secondary_pages(s)
-                    x.append(Student(bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
-            if count%100==0:
-                print('{:3.2f}%'.format((len(x)/2288)*100))
+                    x.append(Student(Student.count, bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
+                    Student.count += 1
+                    
+            #if count == 40:
+                break
+            #if count%100==0:
+                #print('{:3.2f}%'.format((len(x)/2288)*100))
         except AttributeError:
             print("Completed")
+if download :main_pages()
 

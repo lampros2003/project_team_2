@@ -83,7 +83,7 @@ def main_pages():
 
                 x.append(Student(Student.count,pfile[2],pfile[0],pfile[1],datalist[0].get_text(),pfile[3], pfile[4],pfile[6],pfile[7]))
                 Student.count += 1
-                print(x)
+                print(x[-1])
         count+=20
         if count == 40:
             print(x[-1])

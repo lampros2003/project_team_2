@@ -83,7 +83,14 @@ class bara():
         self.ent.pack(side=TOP, fill= BOTH)
         self.listbo = tk.Listbox(self.w,)
         self.listbo.pack(side=BOTTOM,fill=BOTH,expand=True  )
-        
+        self.scrollbar1 = tk.Scrollbar(w)
+        self.scrollbar1.pack(side = RIGHT, fill = BOTH)
+        self.listbo.config(yscrollcommand = self.scrollbar1.set)
+        self.scrollbar1.config(command = self.listbo.yview)
+        self.scrollbar2 = tk.Scrollbar(w)
+        self.scrollbar2.pack(side = RIGHT, fill = BOTH)
+        self.listbo.config(xscrollcommand = self.scrollbar2.set)
+        self.scrollbar2.config(command = self.listbo.xview)
         def display(*args):#εκτυπωνει το περιεχόμενο της μπαρας και δείχνει την λίστα
             
             
@@ -96,6 +103,11 @@ class bara():
                     
                 self.listbo.pack(side= BOTTOM , fill = BOTH, expand = True)
             else :pass
+        
+        
+        
+        
+
         self.ordermenu =  tk.OptionMenu(self.frame2, makeordervar, "date", "alpha writer","alpha title", "date reverse",command= display )
         self.ordermenu.config(bg = 'blue')
         self.ordermenu.pack(side= RIGHT , fill = X, expand = False)
