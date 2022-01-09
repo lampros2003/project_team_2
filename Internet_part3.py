@@ -4,7 +4,7 @@ import ssl
 import certifi
 import os
 from starter import *
-localize_pdf = False
+
 error = False
 save_path = '/nemertespdfs'
 ssl._create_default_https_context = ssl._create_unverified_context
