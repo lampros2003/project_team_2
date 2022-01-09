@@ -94,7 +94,10 @@ def main_pages():
             if counts%100==0:
                 print('{:3.2f}%'.format((len(x)/2288)*100))
             counts+=20
-    except AttributeError:
+    except :
         print("Completed")
+        global error
+        error = True
+        
 if download :main_pages()
 
