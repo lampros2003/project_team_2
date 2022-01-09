@@ -27,13 +27,12 @@ try:
         summary text,
         trans_summary text,
         url text
-        
         )""")#δημιουργια database με επτα κατηγοριες
 
 
 
     for i in range(len(x)):
-        c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?,?,?,?)",(x[i].stucount,unidecode(x[i].writer),unidecode(x[i].title),x[i].trans_title,x[i].date,unidecode(x[i].kwords),x[i].trans_kwords,x[i].summary,x[i].trans_summary),x[i].url)#είσαγουμε τα στοιχεια στο database
+        c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?,?,?,?)",(x[i].stucount[0],unidecode(x[i].writer[0]),unidecode(x[i].title[0]),x[i].trans_title[0],x[i].date,unidecode(x[i].kwords[0]),x[i].trans_kwords[0],x[i].summary[0],x[i].trans_summary[0]),x[i].url[0])#είσαγουμε τα στοιχεια στο database
         
 except:
     pass
@@ -60,6 +59,7 @@ def search(z):
 
 def searchbydate(z):
         global amount
+        z = unicode(z)
         result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' or trans_title LIKE'%{}%' or date LIKE'%{}%' or trans_kwords LIKE'%{}%' or title LIKE'%{}%' or kwords LIKE'%{}%' or summary LIKE '%{}%' COLLATE NOCASE ".format(z,z,z,z,z,z,z)).fetchall()
         con.commit()
         amount = len(result)
