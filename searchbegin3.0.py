@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter.constants import BOTH, BOTTOM, END, LEFT, RIGHT, TOP, X
+from tkinter.constants import BOTH, BOTTOM, END, LEFT, RIGHT, TOP, X, Y
 from DATABASE1 import *
 from operator import itemgetter
 from unidecode import unidecode
@@ -9,7 +9,7 @@ import locale
 #Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
 class bara():
     global var
-    
+    locale.setlocale(locale.LC_ALL, 'en_US')
     
      
     truesearch = search
@@ -28,16 +28,17 @@ class bara():
         self.w.title("Αναζήτηση")
         self.draw() 
     def makeorder(self):
-        if str(makeordervar.get()) == 'date reverse':
+        if str(makeordervar.get()) == 'date reverse' :
             
-            return list(reversed(self.truesearch((str(var.get())))))
+            
+            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[2], '%d-%b-%Y'))
         
             
         if str(makeordervar.get()) == 'alpha writer':
             return sorted((self.truesearch(str(var.get()))))
             
         if str(makeordervar.get()) == 'date':
-            return self.truesearch(str(var.get()))
+            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[2], '%d-%b-%Y'),reverse = True)
         if str(makeordervar.get()) == 'alpha title':
             return  sorted(self.truesearch((str(var.get()))),key = lambda x: x[1])
 
@@ -82,13 +83,14 @@ class bara():
         self.ent = tk.Entry(self.w, textvariable= var)
         self.ent.pack(side=TOP, fill= BOTH)
         self.listbo = tk.Listbox(self.w,)
-        self.listbo.pack(side=BOTTOM,fill=BOTH,expand=True  )
-        self.scrollbar1 = tk.Scrollbar(w)
-        self.scrollbar1.pack(side = RIGHT, fill = BOTH)
+        self.scrollbar1 = tk.Scrollbar(self.w)
+        self.scrollbar1.pack(side = RIGHT, fill = Y)
+        self.listbo.pack(side=TOP,fill=BOTH,expand=True  )
+        
         self.listbo.config(yscrollcommand = self.scrollbar1.set)
         self.scrollbar1.config(command = self.listbo.yview)
-        self.scrollbar2 = tk.Scrollbar(w)
-        self.scrollbar2.pack(side = RIGHT, fill = BOTH)
+        self.scrollbar2 = tk.Scrollbar(self.w, orient= 'horizontal')
+        self.scrollbar2.pack(side = BOTTOM, fill = X)
         self.listbo.config(xscrollcommand = self.scrollbar2.set)
         self.scrollbar2.config(command = self.listbo.xview)
         def display(*args):#εκτυπωνει το περιεχόμενο της μπαρας και δείχνει την λίστα
@@ -100,8 +102,9 @@ class bara():
                 
                 for i in searchreturn:
                     self.listbo.insert(searchreturn.index(i),i)
-                    
-                self.listbo.pack(side= BOTTOM , fill = BOTH, expand = True)
+                self.listbo.pack(side= TOP , fill = BOTH, expand = True)
+                self.scrollbar1.pack(side= RIGHT , fill= Y)    
+                
             else :pass
         
         

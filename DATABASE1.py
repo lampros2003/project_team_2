@@ -1,5 +1,7 @@
 import sqlite3
-from internet_part import *
+
+from bs4 import element
+from Internet_part3 import *
 from unidecode import unidecode
 
 amount = 0
@@ -15,19 +17,24 @@ if download and not error:
     
 try:
     c.execute("""CREATE TABLE work (
+        number text,
         name text,
         title text,
         trans_title text,
         date text,
         kwords text,
         trans_kwords text,
-        summary text
+        summary text,
+        trans_summary text,
+        url text
+        
         )""")#δημιουργια database με επτα κατηγοριες
 
 
 
     for i in range(len(x)):
-        c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?)",(unidecode(x[i].writer),unidecode(x[i].title),x[i].trans_title,x[i].date,unidecode(x[i].kwords),x[i].trans_kwords,x[i].summary))#είσαγουμε τα στοιχεια στο database
+        c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?,?,?,?)",(x[i].stucount,unidecode(x[i].writer),unidecode(x[i].title),x[i].trans_title,x[i].date,unidecode(x[i].kwords),x[i].trans_kwords,x[i].summary,x[i].trans_summary),x[i].url)#είσαγουμε τα στοιχεια στο database
+        
 except:
     pass
 
@@ -76,3 +83,5 @@ def searchtitle(z):
         amount = len(result)
         return result
     
+
+print(elements())

@@ -1,10 +1,10 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import ssl
-import certifi
+#import certifi
 import os
-localize_pdf = True
-download = True
+localize_pdf = False
+download = False
 error = False
 save_path = '/nemertespdfs'
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -41,7 +41,7 @@ class Student():
     def return_contents(self):
         return self.writer + ' , '+self.title +' , '+self.trans_title +' , '+self.date + ' , '+self.kwords +' , '+self.trans_kwords +' , ' +self.summary +' , '+self.trans_summary
     def __repr__(self) :
-        return self.writer + ' , '+self.title +' , '+self.trans_title +' , '+self.date + ' , '+self.kwords +' , '+self.trans_kwords +' , ' +self.summary +' , '+self.trans_summary
+        return str(self.writer) + ' , '+str(self.title) +' , '+str(self.trans_title) +' , '+str(self.date) + ' , '+str(self.kwords) +' , '+str(self.trans_kwords) +' , ' +str(self.summary) +' , '+str(self.trans_summary)
 
 def secondary_pages(s):
     bases={}
@@ -62,9 +62,9 @@ def secondary_pages(s):
     bases['pdf']=download_pdf(soup)
     if localize_pdf:
         completeName = os.path.join(save_path, str(Student.count))
-        
-        print('at work')
-        download_file(bases['pdf'],completeName)
+        if not os.path.exists(completeName):
+            
+            download_file(bases['pdf'],completeName)
 
     return bases
 
@@ -88,11 +88,16 @@ def main_pages():
                     short_link=link['href'][13:]
                     s='http://hdl.handle.net'+short_link
                     bases=secondary_pages(s)
-                    x.append(Student(Student.count, bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
+                    x.append(Student(str(Student.count), bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
                     Student.count += 1
                     
-            #if count == 40:
-                break
+                    if Student.count == 5:
+                        break
+
+            #count += 20
+                    
+            #if count == 20:
+             #   break
             #if count%100==0:
                 #print('{:3.2f}%'.format((len(x)/2288)*100))
         except AttributeError:
