@@ -1,17 +1,17 @@
 import requests
 
-def internet_connection():
-    url = "http://google.com"
-    timeout = 4
+url = "http://google.com"
+timeout = 4
 
-    try:
-        request = requests.get(url, timeout = timeout)
-        print("Connected to internet")
-    except:
-        print("No internet connection")
+try:
+    request = requests.get(url, timeout = timeout)
+    print("Connected to internet")
+    internet = True
+except:
+    print("No internet connection")
+    internet = False
 
 
-internet_connection()
 
 
 
