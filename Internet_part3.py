@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import ssl
-#import certifi
+import certifi
 import os
 localize_pdf = False
 download = False
@@ -53,7 +53,7 @@ def secondary_pages(s):
     for tag in tables.find_all('tr'):
         datalist=list(tag.children)
         k = datalist[0].get_text().strip()
-        v = [x.get_text() for x in datalist[1] if x.get_text()]
+        v = (datalist[1].get_text(" "))
         bases[k] = v
         
     P=L-(set(bases.keys()))
@@ -72,8 +72,9 @@ def main_pages():
     count=0
     global x
     x = []
-    while True:
-        try:
+    try:  
+        while True:
+        
             url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(count))
             info=url.read()
             soup=BeautifulSoup(info,'html.parser')
@@ -90,17 +91,10 @@ def main_pages():
                     bases=secondary_pages(s)
                     x.append(Student(str(Student.count), bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
                     Student.count += 1
-                    
-                    if Student.count == 5:
-                        break
-
-            #count += 20
-                    
-            #if count == 20:
-             #   break
-            #if count%100==0:
-                #print('{:3.2f}%'.format((len(x)/2288)*100))
-        except AttributeError:
-            print("Completed")
+            if count%100==0:
+                print('{:3.2f}%'.format((len(x)/2288)*100))
+            counts+=20
+    except AttributeError:
+        print("Completed")
 if download :main_pages()
 
