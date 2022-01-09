@@ -57,6 +57,15 @@ class bara():
         self.searchbyallcall()
         self.w.config(bg= 'white')
         self.w.geometry('1000x1000')
+        self.msearch = tk.Menu(self.w, tearoff=0)
+        self.msearch.add_command(label="Search locally")
+        self.msearch.add_separator()
+        self.msearch.add_command(label="Search on web")
+        def do_popup(event):
+            
+            self.msearch.tk_popup(event.x_root, event.y_root)
+            
+                
         var = tk.StringVar(self.w)#το κείμενο μεσα στην μπαρα ορίζεται ως μεταβλητη var (οχι τελικό ονομα)
         self.frame = tk.Frame(bg = 'Blue')
         self.frame.pack(side= TOP , fill = BOTH, expand = False)
@@ -103,7 +112,9 @@ class bara():
                 for i in searchreturn:
                     self.listbo.insert(searchreturn.index(i),i)
                 self.listbo.pack(side= TOP , fill = BOTH, expand = True)
+                self.listbo.bind('<Button-1>',do_popup)
                 self.scrollbar1.pack(side= RIGHT , fill= Y)    
+                
                 
             else :pass
         
