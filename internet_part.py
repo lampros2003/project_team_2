@@ -2,10 +2,12 @@ from tkinter.constants import TRUE
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import os
-download = True
+from starter import *
+
 error = False
 localize_pdf = True
 save_path = '/pdfs'
+
 if not os.path.exists(save_path):
     os.mkdir(save_path)
 def download_pdf(soup):
