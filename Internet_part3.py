@@ -91,7 +91,7 @@ def main_pages():
                     bases=secondary_pages(s)
                     x.append(Student(str(Student.count), bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
                     Student.count += 1
-            if count%100==0:
+            if counts%100==0:
                 print('{:3.2f}%'.format((len(x)/2288)*100))
             counts+=20
     except AttributeError:
