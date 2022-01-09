@@ -14,7 +14,9 @@ def no():
 page = tk.Tk()
 page.resizable(False,False)
 
-b1 = tk.Button(page,text ='renew database',font ='Arial 30',bg='blue',command = yes).pack()
-b2 = tk.Button(page,text ='offline version',font ='Arial 30',bg='blue',command = no).pack()
+b1 = tk.Button(page,text ='renew database',font ='Arial 30',bg='blue',command = yes)
+b1.pack()
+b2 = tk.Button(page,text ='offline version',font ='Arial 30',bg='blue',command = no)
+b2.pack()
 
 page.mainloop()
