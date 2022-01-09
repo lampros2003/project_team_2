@@ -69,13 +69,13 @@ def secondary_pages(s):
     return bases
 
 def main_pages():
-    count=0
+    counts=0
     global x
     x = []
     try:  
         while True:
         
-            url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(count))
+            url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(counts))
             info=url.read()
             soup=BeautifulSoup(info,'html.parser')
             table=soup.find('table',{'class':'table'})
