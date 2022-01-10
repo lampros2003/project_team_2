@@ -94,6 +94,8 @@ def main_pages():
             if counts%100==0:
                 print('{:3.2f}%'.format((len(x)/2288)*100))
             counts+=20
+            if counts == 40 :
+                break
     except :
         print("Completed")
         global error

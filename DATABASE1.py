@@ -47,11 +47,11 @@ def elements():
 def search(z):
         global amount
         z = unidecode(z)
-        result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%'COLLATE NOCASE ".format(z)).fetchall()
-        result = result + c.execute("SELECT name,trans_title,date FROM work WHERE (title LIKE '%{}%' or trans_title LIKE'%{}%') and not name LIKE '%{}%' COLLATE NOCASE".format(z,z,z)).fetchall()
-        result = result + c.execute("SELECT name,trans_title,date FROM work WHERE (trans_kwords LIKE'%{}%' or  kwords LIKE'%{}%') and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z)).fetchall()
-        result = result + c.execute("SELECT name,trans_title,date FROM work WHERE summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z)).fetchall() 
-        result = result + c.execute("SELECT name,trans_title,date FROM work WHERE date Like '%{}%' and not summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z,z)).fetchall()
+        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE name LIKE '%{}%'COLLATE NOCASE ".format(z)).fetchall()
+        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE (title LIKE '%{}%' or trans_title LIKE'%{}%') and not name LIKE '%{}%' COLLATE NOCASE".format(z,z,z)).fetchall()
+        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE (trans_kwords LIKE'%{}%' or  kwords LIKE'%{}%') and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z)).fetchall()
+        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z)).fetchall() 
+        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE date Like '%{}%' and not summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z,z)).fetchall()
         con.commit()
         amount = len(result)
         return result
@@ -60,7 +60,7 @@ def search(z):
 def searchbydate(z):
         global amount
         z = unicode(z)
-        result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' or trans_title LIKE'%{}%' or date LIKE'%{}%' or trans_kwords LIKE'%{}%' or title LIKE'%{}%' or kwords LIKE'%{}%' or summary LIKE '%{}%' COLLATE NOCASE ".format(z,z,z,z,z,z,z)).fetchall()
+        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE name LIKE '%{}%' or trans_title LIKE'%{}%' or date LIKE'%{}%' or trans_kwords LIKE'%{}%' or title LIKE'%{}%' or kwords LIKE'%{}%' or summary LIKE '%{}%' COLLATE NOCASE ".format(z,z,z,z,z,z,z)).fetchall()
         con.commit()
         amount = len(result)
         return result
@@ -69,7 +69,7 @@ def searchbydate(z):
 def searchname(z):
         global amount
         z = unidecode(z)
-        result = c.execute("SELECT name,trans_title,date FROM work WHERE name LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
+        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE name LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
         con.commit()
         amount = len(result)
         return result
@@ -78,7 +78,7 @@ def searchname(z):
 def searchtitle(z):
         global amount
         z = unidecode(z)
-        result = c.execute("SELECT name,trans_title,date FROM work WHERE trans_title LIKE '%{}%' or title LIKE '%{}%' COLLATE NOCASE".format(z,z)).fetchall()
+        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE trans_title LIKE '%{}%' or title LIKE '%{}%' COLLATE NOCASE".format(z,z)).fetchall()
         con.commit()
         amount = len(result)
         return result

@@ -5,6 +5,9 @@ from operator import itemgetter
 from unidecode import unidecode
 from datetime import *
 import locale
+import webbrowser
+import subprocess
+
 #Η κλαση μπαρα παιρνει ενα tk.Tk() object και το κανει παραθυρο αναζητησης
 #Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
 class bara():
@@ -31,14 +34,14 @@ class bara():
         if str(makeordervar.get()) == 'date reverse' :
             
             
-            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[2], '%d-%b-%Y'))
+            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[3], '%d-%b-%Y'))
         
             
         if str(makeordervar.get()) == 'alpha writer':
             return sorted((self.truesearch(str(var.get()))))
             
         if str(makeordervar.get()) == 'date':
-            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[2], '%d-%b-%Y'),reverse = True)
+            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[3], '%d-%b-%Y'),reverse = True)
         if str(makeordervar.get()) == 'alpha title':
             return  sorted(self.truesearch((str(var.get()))),key = lambda x: x[1])
 
@@ -57,14 +60,7 @@ class bara():
         self.searchbyallcall()
         self.w.config(bg= 'white')
         self.w.geometry('1000x1000')
-        self.msearch = tk.Menu(self.w, tearoff=0)
-        self.msearch.add_command(label="Search locally")
-        self.msearch.add_separator()
-        self.msearch.add_command(label="Search on web")
-        def do_popup(event):
-            
-            self.msearch.tk_popup(event.x_root, event.y_root)
-            
+        
                 
         var = tk.StringVar(self.w)#το κείμενο μεσα στην μπαρα ορίζεται ως μεταβλητη var (οχι τελικό ονομα)
         self.frame = tk.Frame(bg = 'Blue')
@@ -102,6 +98,32 @@ class bara():
         self.scrollbar2.pack(side = BOTTOM, fill = X)
         self.listbo.config(xscrollcommand = self.scrollbar2.set)
         self.scrollbar2.config(command = self.listbo.xview)
+        def searchweb():
+            tosearch = self.listbo.curselection()[-1]
+            
+            thelink = self.listbo.get(tosearch)[-1]
+            webbrowser.open(thelink)
+
+        def searchlocal():
+            tosearch = self.listbo.curselection()[-1]
+            thenum = os.path.join(save_path,self.listbo.get(tosearch)[0] )
+            print( thenum + '.pdf' )
+            subprocess.Popen( thenum + '.pdf' ,shell=True)
+        def downer():
+            pass
+
+
+
+        self.msearch = tk.Menu(self.w, tearoff=0)
+        self.msearch.add_command(label="Search locally", command= searchlocal )
+        self.msearch.add_separator()
+        self.msearch.add_command(label="Search on web", command= searchweb)
+        self.msearch.add_separator()
+        self.msearch.add_command(label="Download this file ", command= downer)
+        def do_popup(event):
+            
+            self.msearch.tk_popup(event.x_root, event.y_root)
+            
         def display(*args):#εκτυπωνει το περιεχόμενο της μπαρας και δείχνει την λίστα
             
             
@@ -112,7 +134,7 @@ class bara():
                 for i in searchreturn:
                     self.listbo.insert(searchreturn.index(i),i)
                 self.listbo.pack(side= TOP , fill = BOTH, expand = True)
-                self.listbo.bind('<Button-1>',do_popup)
+                self.listbo.bind('<Button-3>',do_popup)
                 self.scrollbar1.pack(side= RIGHT , fill= Y)    
                 
                 
