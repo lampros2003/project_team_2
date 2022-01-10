@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import messagebox
+import os.path
 from askhsh import *
 
 download = False
@@ -26,6 +28,9 @@ if internet:
     b2.pack(fill = 'x')
 
     page.mainloop()
+else:
+    check = os.path.isfile("work.db")
+    if not check: messagebox.showinfo("ERROR","Δεν υπαρχει αποθηκευμενη database")
 
 if download:
     
