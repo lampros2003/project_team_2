@@ -4,7 +4,8 @@ import ssl
 import certifi
 import os
 from starter import *
-
+localize_pdf = True
+download = True
 error = False
 save_path = '/nemertespdfs'
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -41,7 +42,7 @@ class Student():
     def return_contents(self):
         return self.writer + ' , '+self.title +' , '+self.trans_title +' , '+self.date + ' , '+self.kwords +' , '+self.trans_kwords +' , ' +self.summary +' , '+self.trans_summary
     def __repr__(self) :
-        return str(self.writer) + ' , '+str(self.title) +' , '+str(self.trans_title) +' , '+str(self.date) + ' , '+str(self.kwords) +' , '+str(self.trans_kwords) +' , ' +str(self.summary) +' , '+str(self.trans_summary)
+        return self.writer + ' , '+self.title +' , '+self.trans_title +' , '+self.date + ' , '+self.kwords +' , '+self.trans_kwords +' , ' +self.summary +' , '+self.trans_summary
 
 def secondary_pages(s):
     bases={}
@@ -53,7 +54,7 @@ def secondary_pages(s):
     for tag in tables.find_all('tr'):
         datalist=list(tag.children)
         k = datalist[0].get_text().strip()
-        v = (datalist[1].get_text(" "))
+        v = [x.get_text() for x in datalist[1] if x.get_text()]
         bases[k] = v
         
     P=L-(set(bases.keys()))
@@ -62,20 +63,19 @@ def secondary_pages(s):
     bases['pdf']=download_pdf(soup)
     if localize_pdf:
         completeName = os.path.join(save_path, str(Student.count))
-        if not os.path.exists(completeName):
-            
-            download_file(bases['pdf'],completeName)
+        
+        print('at work')
+        download_file(bases['pdf'],completeName)
 
     return bases
 
 def main_pages():
-    counts=0
+    count=0
     global x
     x = []
-    try:  
-        while True:
-        
-            url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(counts))
+    while True:
+        try:
+            url=urlopen('https://nemertes.library.upatras.gr/jspui/handle/10889/43?offset={}'.format(count))
             info=url.read()
             soup=BeautifulSoup(info,'html.parser')
             table=soup.find('table',{'class':'table'})
@@ -89,15 +89,14 @@ def main_pages():
                     short_link=link['href'][13:]
                     s='http://hdl.handle.net'+short_link
                     bases=secondary_pages(s)
-                    x.append(Student(str(Student.count), bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
+                    x.append(Student(Student.count, bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
                     Student.count += 1
-            if counts%100==0:
-                print('{:3.2f}%'.format((len(x)/2288)*100))
-            counts+=20
-    except :
-        print("Completed")
-        global error
-        error = True
-        
+            count += 20        
+            if count == 40:
+                break
+            #if count%100==0:
+                #print('{:3.2f}%'.format((len(x)/2288)*100))
+        except AttributeError:
+            print("Completed")
 if download :main_pages()
 
