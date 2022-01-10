@@ -6,7 +6,7 @@ from unidecode import unidecode
 from datetime import *
 import locale
 #Η κλαση μπαρα παιρνει ενα tk.Tk() object και το κανει παραθυρο αναζητησης
-#Η κλάση bara λειτουργεί με self structure
+#Η κλάση bara λειτουργεί με self structure(δες αν γίνεται να συμπεριλάβεις το παράθυρο μέσα στην μπάρα)
 class bara():
     global var
     locale.setlocale(locale.LC_ALL, 'en_US')
@@ -46,7 +46,7 @@ class bara():
         
         
     
-    def draw(self):#το γραφικό περιβάλλων,
+    def draw(self):#το γραφικό περιβάλλων,ν γίνει πιο ευπαρουσίαστο
         global var
         global truesearch
         global makeordervar
