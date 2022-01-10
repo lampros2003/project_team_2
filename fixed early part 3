@@ -70,8 +70,10 @@ def main_pages():
                     s='http://hdl.handle.net'+short_link
                     bases=secondary_pages(s)
                     x.append(Student(bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
-            if count%100==0:
-                print('{:3.2f}%'.format((len(x)/2288)*100))
+            #if count%100==0:
+            #    print('{:3.2f}%'.format((len(x)/2288)*100))
             counts+=20
+            if counts == 40 :
+                break
     except AttributeError:
         print("Completed")
