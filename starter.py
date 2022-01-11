@@ -18,7 +18,6 @@ def check():
     
 def done():
     global localize_pdf
-    global answer
     answer = messagebox.askquestion("Προσοχη!","Για να κατεβούν τα pdf χρειάζεται πολύ ώρα.Είστε σίγουροι οτι θέλετε να συνεχίσετε;")
     if answer == 'yes':
         localize_pdf = True
