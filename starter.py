@@ -4,7 +4,6 @@ import sys
 from tkinter import messagebox
 from askhsh import *
 
-check = True
 download = False
 localize_pdf = False
 
