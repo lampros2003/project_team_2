@@ -5,10 +5,8 @@ timeout = 4
 
 try:
     request = requests.get(url, timeout = timeout)
-    print("Connected to internet")
     internet = True
 except:
-    print("No internet connection")
     internet = False
 
 
