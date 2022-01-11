@@ -14,7 +14,12 @@ class bara():
     global var
     locale.setlocale(locale.LC_ALL, 'en_US')
     
-     
+    def convertTuple(self,tup):
+        
+        str = ''
+        for item in tup:
+            str = str +'  '+ item
+        return str
     truesearch = search
     def searchbynamecall(self) :
         self.truesearch= searchname
@@ -102,18 +107,20 @@ class bara():
         def searchweb():
             tosearch = self.listbo.curselection()[-1]
             
-            thelink = self.listbo.get(tosearch)[-1]
+            thelink = self.listbo.get(tosearch).split(' ')[-1]
+            
             webbrowser.open(thelink)
 
         def searchlocal():
             tosearch = self.listbo.curselection()[-1]
-            thenum = os.path.join(save_path,self.listbo.get(tosearch)[0] )
+            print(self.listbo.get(tosearch).split('  '))
+            thenum = os.path.join(save_path,self.listbo.get(tosearch).split('  ')[1] )
             
             subprocess.Popen( thenum + '.pdf' ,shell=True)
         def downloadspecific():
             tosearch = self.listbo.curselection()[-1]
-            dlpath = os.path.join(save_path, self.listbo.get(tosearch)[0])
-            filurl = self.listbo.get(tosearch)[-1]
+            dlpath = os.path.join(save_path, self.listbo.get(tosearch).split('  ')[1])
+            filurl = self.listbo.get(tosearch).split('  ')[-1]
             
             download_file(filurl,dlpath)
 
@@ -139,7 +146,7 @@ class bara():
                 searchreturn = self.makeorder()
                 
                 for i in searchreturn:
-                    self.listbo.insert(searchreturn.index(i) ,i)
+                    self.listbo.insert(searchreturn.index(i),self.convertTuple(i))
                 self.listbo.pack(side= TOP , fill = BOTH, expand = True)
                 self.listbo.bind('<Button-3>',do_popup)
                 self.scrollbar1.pack(side= RIGHT , fill= Y)    
