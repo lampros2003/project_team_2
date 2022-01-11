@@ -11,7 +11,7 @@ localize_pdf = False
 def check():
     checking = os.path.isfile("work.db")
     if not checking:
-        messagebox.showinfo("ERROR","Δεν υπαρχει απθηκευμενη database")
+        messagebox.showinfo("ERROR","Δεν υπαρχει απθηκευμενη database",icon = 'warning')
         global check
         check = False
     elif internet: page.destroy()
