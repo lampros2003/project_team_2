@@ -31,20 +31,21 @@ class bara():
         self.w.title("Αναζήτηση")
         self.draw() 
     def makeorder(self):
-        if str(makeordervar.get()) == 'date reverse' :
+        if str(makeordervar.get()) == 'Παλαιότερο' :
             
             
             return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[3], '%d-%b-%Y'))
         
             
-        if str(makeordervar.get()) == 'alpha writer':
+        if str(makeordervar.get()) == 'Αλφαβιτική σειρά συγγραφέα':
             return sorted((self.truesearch(str(var.get()))))
             
-        if str(makeordervar.get()) == 'date':
+        if str(makeordervar.get()) == 'Νεότερο':
             return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[3], '%d-%b-%Y'),reverse = True)
-        if str(makeordervar.get()) == 'alpha title':
+        if str(makeordervar.get()) == 'Αλφαβιτική σειρά τίτλου':
             return  sorted(self.truesearch((str(var.get()))),key = lambda x: x[1])
-
+        if str(makeordervar.get()) == 'Ομοιότητα':
+            return self.truesearch(str(var.get()))
 
         
         
@@ -56,7 +57,7 @@ class bara():
         global display
         
         makeordervar = tk.StringVar(self.w)
-        makeordervar.set('date')
+        makeordervar.set('Ομοιότητα')
         self.searchbyallcall()
         self.w.config(bg= 'white')
         self.w.geometry('1000x1000')
@@ -107,19 +108,25 @@ class bara():
         def searchlocal():
             tosearch = self.listbo.curselection()[-1]
             thenum = os.path.join(save_path,self.listbo.get(tosearch)[0] )
-            print( thenum + '.pdf' )
+            
             subprocess.Popen( thenum + '.pdf' ,shell=True)
-        def downer():
-            pass
+        def downloadspecific():
+            tosearch = self.listbo.curselection()[-1]
+            dlpath = os.path.join(save_path, self.listbo.get(tosearch)[0])
+            filurl = self.listbo.get(tosearch)[-1]
+            
+            download_file(filurl,dlpath)
+
+        
 
 
 
         self.msearch = tk.Menu(self.w, tearoff=0)
-        self.msearch.add_command(label="Search locally", command= searchlocal )
+        self.msearch.add_command(label="Ψάξε στο save_directory", command= searchlocal )
         self.msearch.add_separator()
-        self.msearch.add_command(label="Search on web", command= searchweb)
+        self.msearch.add_command(label="Ψάξε στο ίντερνετ", command= searchweb)
         self.msearch.add_separator()
-        self.msearch.add_command(label="Download this file ", command= downer)
+        self.msearch.add_command(label="Κατέβασε το συγκεκριμένο αρχείο", command= downloadspecific)
         def do_popup(event):
             
             self.msearch.tk_popup(event.x_root, event.y_root)
@@ -132,7 +139,7 @@ class bara():
                 searchreturn = self.makeorder()
                 
                 for i in searchreturn:
-                    self.listbo.insert(searchreturn.index(i),i)
+                    self.listbo.insert(searchreturn.index(i) ,i)
                 self.listbo.pack(side= TOP , fill = BOTH, expand = True)
                 self.listbo.bind('<Button-3>',do_popup)
                 self.scrollbar1.pack(side= RIGHT , fill= Y)    
@@ -144,7 +151,7 @@ class bara():
         
         
 
-        self.ordermenu =  tk.OptionMenu(self.frame2, makeordervar, "date", "alpha writer","alpha title", "date reverse",command= display )
+        self.ordermenu =  tk.OptionMenu(self.frame2, makeordervar, "Νεότερο", "Αλφαβιτική σειρά συγγραφέα","Αλφαβιτική σειρά τίτλου", "Παλαιότερο", 'Ομοιότητα',command= display )
         self.ordermenu.config(bg = 'blue')
         self.ordermenu.pack(side= RIGHT , fill = X, expand = False)
 

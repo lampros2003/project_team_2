@@ -62,9 +62,9 @@ def secondary_pages(s):
     bases['pdf']=download_pdf(soup)
     if localize_pdf:
         completeName = os.path.join(save_path, str(Student.count))
-        if not os.path.exists(completeName):
+        
             
-            download_file(bases['pdf'],completeName)
+        download_file(bases['pdf'],completeName)
 
     return bases
 
