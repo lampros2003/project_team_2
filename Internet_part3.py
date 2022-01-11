@@ -94,11 +94,16 @@ def main_pages():
             if counts%100==0:
                 print('{:3.2f}%'.format((len(x)/2288)*100))
             counts+=20
+<<<<<<< HEAD
             if counts == 400:
                 break
             
     except :
+=======
+    except AttributeError :
+>>>>>>> 6ee7933b91066701b776aad3128a77d397433796
         print("Completed")
+    except:
         global error
         error = True
         
