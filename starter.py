@@ -1,24 +1,32 @@
 import tkinter as tk
 import os.path
+import sys
 from tkinter import messagebox
 from askhsh import *
 
+check = True
 download = False
 localize_pdf = False
 
 def check():
     checking = os.path.isfile("work.db")
-    if not checking: messagebox.showinfo("ERROR","Δεν υπαρχει απθηκευμενη database")
-    else:page.destroy()
+    if not checking:
+        messagebox.showinfo("ERROR","Δεν υπαρχει απθηκευμενη database")
+        global check
+        check = False
+    elif internet: page.destroy()
     
 def done():
     global localize_pdf
-    localize_pdf = True
-    pdfpage.destroy()
+    global answer
+    answer = messagebox.askquestion("Προσοχη!","Για να κατεβούν τα pdf χρειάζεται πολύ ώρα.Είστε σίγουροι οτι θέλετε να συνεχίσετε;")
+    if answer == 'yes':
+        localize_pdf = True
+        pdfpage.destroy()
 
 def yes():
-    global download
-    download = True
+    global download,check
+    download,check = True,True
     page.destroy()
 
 if internet:   
@@ -46,3 +54,7 @@ if download:
     b2.pack(fill = 'x')
     
     pdfpage.mainloop()
+
+    
+if not check: sys.exit()  
+
