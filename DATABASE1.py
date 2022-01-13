@@ -18,6 +18,7 @@ if download and not error:
 try:
     c.execute("""CREATE TABLE work (
         number text,
+        Greekname text,
         name text,
         title text,
         trans_title text,
@@ -32,7 +33,7 @@ try:
 
 
     for i in range(len(x)):
-        c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?,?,?,?)",(x[i].stucount,unidecode(x[i].writer),unidecode(x[i].title),x[i].trans_title,x[i].date,unidecode(x[i].kwords),x[i].trans_kwords,unidecode(x[i].summary),x[i].trans_summary,x[i].url))#είσαγουμε τα στοιχεια στο database
+        c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?,?,?,?,?)",(x[i].stucount,x[i].writer,unidecode(x[i].writer),unidecode(x[i].title),x[i].trans_title,x[i].date,unidecode(x[i].kwords),x[i].trans_kwords,unidecode(x[i].summary),x[i].trans_summary,x[i].url))#είσαγουμε τα στοιχεια στο database
         
 except:
     pass
@@ -42,33 +43,25 @@ con.commit()
 
 def search(z):
         z = unidecode(z)
-        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE name LIKE '%{}%'COLLATE NOCASE ".format(z)).fetchall()
-        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE (title LIKE '%{}%' or trans_title LIKE'%{}%') and not name LIKE '%{}%' COLLATE NOCASE".format(z,z,z)).fetchall()
-        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE (trans_kwords LIKE'%{}%' or  kwords LIKE'%{}%') and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z)).fetchall()
-        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z)).fetchall() 
-        result = result + c.execute("SELECT number,name,trans_title,date,url FROM work WHERE date Like '%{}%' and not summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z,z)).fetchall()
-        con.commit()
-        return result
-
-
-def searchbydate(z):
-        z = unicode(z)
-        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE name LIKE '%{}%' or trans_title LIKE'%{}%' or date LIKE'%{}%' or trans_kwords LIKE'%{}%' or title LIKE'%{}%' or kwords LIKE'%{}%' or summary LIKE '%{}%' COLLATE NOCASE ".format(z,z,z,z,z,z,z)).fetchall()
+        result = c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE name LIKE '%{}%'COLLATE NOCASE ".format(z)).fetchall()
+        result = result + c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE (title LIKE '%{}%' or trans_title LIKE'%{}%') and not name LIKE '%{}%' COLLATE NOCASE".format(z,z,z)).fetchall()
+        result = result + c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE (trans_kwords LIKE'%{}%' or  kwords LIKE'%{}%') and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z)).fetchall()
+        result = result + c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z)).fetchall() 
+        result = result + c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE date Like '%{}%' and not summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z,z)).fetchall()
         con.commit()
         return result
 
 
 def searchname(z):
         z = unidecode(z)
-        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE name LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
+        result = c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE name LIKE '%{}%' COLLATE NOCASE".format(z)).fetchall()
         con.commit()
         return result
 
         
 def searchtitle(z):
         z = unidecode(z)
-        result = c.execute("SELECT number,name,trans_title,date,url FROM work WHERE trans_title LIKE '%{}%' or title LIKE '%{}%' COLLATE NOCASE".format(z,z)).fetchall()
+        result = c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE trans_title LIKE '%{}%' or title LIKE '%{}%' COLLATE NOCASE".format(z,z)).fetchall()
         con.commit()
         return result
-    
-
+   
