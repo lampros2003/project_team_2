@@ -134,7 +134,7 @@ class bara():
             tosearch = self.listbo.curselection()[-1]
             dlpath = os.path.join(save_path, self.listbo.get(tosearch).split('  ')[1])
             filurl = self.listbo.get(tosearch).split('  ')[-1]
-            #και το λινκ φιλεθρλ και το complete directory του αρχείου dlpath
+            #και το λινκ fileurl και το complete directory του αρχείου dlpath
             download_file(filurl,dlpath)
             #κατεβάζω το αρχείο στο dlpath
 
