@@ -27,7 +27,7 @@ if download:
         summary text,
         trans_summary text,
         url text
-        )""")#δημιουργια table με επτα κατηγοριες
+        )""")#δημιουργια table με εντεκα κατηγοριες
 
 
 
