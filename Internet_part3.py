@@ -8,7 +8,7 @@ from starter import *
 error = False
 
 ssl._create_default_https_context = ssl._create_unverified_context
-if not os.path.exists(save_path):
+if not os.path.exists(save_path):#(Λάμπρος Αβούρης ) αν το save_path δεν υπάρχει το φτίαχνω
     os.mkdir(save_path)
 def download_pdf(soup):
     links=soup.find_all('a',{'target':'_blank'})
@@ -17,11 +17,11 @@ def download_pdf(soup):
             url='https://nemertes.library.upatras.gr/'+link['href']
             return url
 
-def download_file(download_url, filename):
-    response = urlopen(download_url)    
-    file = open(filename + ".pdf", 'wb')
+def download_file(download_url, filename):#προγραμμα που κατεβάζει ένα αρχείο pdf  με url:downloadurl και το σώζει ως αρχείο με ονομα filename
+    response = urlopen(download_url)   #περνω τα bytes του pdf
+    file = open(filename + ".pdf", 'wb')#γράφω τα bytes του pdf σε ενα αρχέιο ανοιχτο ως writebytes(wb)
     file.write(response.read())
-    file.close()
+    file.close()#κλείνω
 class Student():
     count=0
     def __init__(self,stucount,title='',trans_title='',writer='',kwords='',trans_kwords='',summary='',trans_summary='',url='',date=''):
@@ -60,11 +60,13 @@ def secondary_pages(s):
     for i in P:
         bases[i]=''
     bases['pdf']=download_pdf(soup)
-    if localize_pdf:
+    if localize_pdf:#(Λαμπρος Αβούρης ) εαν ο χρήστης θέλει να κατεβάσει τα pdf τα κατεβάζω
         completeName = os.path.join(save_path, str(Student.count))
-        
+        print(completeName)
+        #το συνολικό ονομα του pdf ειναι ο αριθμός του μαθητη του οποιου αποτελει διπλωματικη συνδιασμένο με το save_path
+        #τα κάνω join με το os.join για να είμαι σιγουρος οτι αποτελούν σωστό directory
             
-        download_file(bases['pdf'],completeName)
+        download_file(bases['pdf'],completeName)#κατεβάζω το αρχείο στο directory
 
     return bases
 
@@ -94,7 +96,7 @@ def main_pages():
             if counts%100==0:
                 print('{:3.2f}%'.format((len(x)/2288)*100))
             counts+=20
-            if counts == 20 :
+            if counts == 20:
                 break
             
     except AttributeError:

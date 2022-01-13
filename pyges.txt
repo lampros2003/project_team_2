@@ -16,3 +16,5 @@ https://docs.python.org/2/library/os.html#os.mkdir
 https://pretagteam.com/question/get-last-element-of-dictionary-python
 https://www.geeksforgeeks.org/downloading-pdfs-with-python-using-requests-and-beautifulsoup/
 https://www.geeksforgeeks.org/how-to-get-selected-value-from-listbox-in-tkinter/
+https://stackoverflow.com/questions/57070170/how-to-get-path-withtkinter-filedialog
+https://www.programcreek.com/python/example/95888/tkinter.filedialog.askdirectory

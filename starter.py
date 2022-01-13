@@ -9,11 +9,11 @@ global save_path
 download = False
 localize_pdf = False
 
-if not os.path.isfile('wheretosave.txt') :
-    with open('wheretosave.txt', 'w') as f:
+if not os.path.isfile('wheretosave.txt') :#αν δεν υπαρχει αρχειο που σώζει το Path το φτιαχνω (μονο στην πρωτη φορα θα συμβει αυτο προφανως )   
+    with open('wheretosave.txt', 'w') as f:#σωζψ το αρχικό save_directory 
         f.write(str('nemertespdfs'))
 else :
-    with open('wheretosave.txt', 'r') as f:
+    with open('wheretosave.txt', 'r') as f:#εαν το αρχείο υπαρχει διαβ΄ζω το save directory
         save_path = f.read()
      
 def check():   #ελέγχει εάν υπάρχει το database. εάν οχι δίνει warning
@@ -29,9 +29,10 @@ def yes():
     global localize_pdf
     answer = messagebox.askquestion("Προσοχη!","Για να κατεβούν τα pdf χρειάζεται πολύ ώρα.Είστε σίγουροι οτι θέλετε να συνεχίσετε;")
     if answer == 'yes':
+        global save_path
         localize_pdf = True
-        save_path = filedialog.askdirectory()
-        with open('wheretosave.txt', 'w') as f:
+        save_path = filedialog.askdirectory()#(Λαμπρος Αβουρης) Παίρνω path παο τον χρήστη  
+        with open('wheretosave.txt', 'w') as f:#σώζω το path σε αρχέιο
             f.write(save_path)
         pdfpage.destroy()
 
