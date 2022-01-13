@@ -6,7 +6,7 @@ import os
 from starter import *
 
 error = False
-save_path = '/nemertespdfs'
+
 ssl._create_default_https_context = ssl._create_unverified_context
 if not os.path.exists(save_path):
     os.mkdir(save_path)
@@ -94,6 +94,8 @@ def main_pages():
             if counts%100==0:
                 print('{:3.2f}%'.format((len(x)/2288)*100))
             counts+=20
+            if counts == 20 :
+                break
             
     except AttributeError:
         print("Completed")

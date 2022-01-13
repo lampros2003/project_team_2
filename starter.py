@@ -3,12 +3,20 @@ import os.path
 import sys
 from tkinter import messagebox
 from askhsh import *
+from tkinter import filedialog
+global save_path
 
 download = False
 localize_pdf = False
-
+if not os.path.isfile('wheretosave.txt') :
+    with open('wheretosave.txt', 'w') as f:
+        f.write(str('nemertespdfs'))
+else :
+    with open('wheretosave.txt', 'r') as f:
+        save_path = f.read()
 def check():
     checking = os.path.isfile("work.db")
+    print(save_path)
     if not checking:
         messagebox.showinfo("ERROR","Δεν υπαρχει απθηκευμενη database",icon = 'warning')
         global check
@@ -20,11 +28,15 @@ def done():
     answer = messagebox.askquestion("Προσοχη!","Για να κατεβούν τα pdf χρειάζεται πολύ ώρα.Είστε σίγουροι οτι θέλετε να συνεχίσετε;")
     if answer == 'yes':
         localize_pdf = True
+        save_path = filedialog.askdirectory()
+        with open('wheretosave.txt', 'w') as f:
+            f.write(save_path)
         pdfpage.destroy()
 
 def yes():
     global download,check
     download,check = True,True
+    
     page.destroy()
 
 if internet:   
@@ -53,6 +65,7 @@ if download:
     
     pdfpage.mainloop()
 
-    
+
+   
 if not check: sys.exit()  
 
