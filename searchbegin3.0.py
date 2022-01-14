@@ -22,6 +22,7 @@ class bara():
         #listbox δεν έχει καλό εμφανισιακό αποτέλεσμα
         
         str = ''
+        print(tup)
         for item in tup:
             str = str +'  '+ item
         return str
@@ -160,7 +161,7 @@ class bara():
                 searchreturn = self.makeorder()
                 
                 for i in searchreturn:#βάζω τα αποτελέσματα στο Listbox ως str
-                    self.listbo.insert(searchreturn.index(i),self.convertTuple(i))
+                    self.listbo.insert(searchreturn.index(i),i)
                 self.listbo.pack(side= TOP , fill = BOTH, expand = True)#κάνω pack to listbox
                 self.listbo.bind('<Button-3>',popemup)#κάνω bind το button3 με το popemup
                 self.scrollbar1.pack(side= RIGHT , fill= Y)    #ξανακάνω pack to σψρολλβαρ για να μείνει στην ίδια θέση
