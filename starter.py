@@ -68,5 +68,5 @@ else:check()
 
 
    
-if not check: sys.exit()  
+if not check: sys.exit()  #εαν δεν υπάρχει η βάση δεδομένων ή δεν θα την κατεβάσει ο χρήστης κλείνει το πρόγραμμα
 
