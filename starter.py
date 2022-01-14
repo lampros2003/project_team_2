@@ -52,8 +52,8 @@ if internet:
 
     page.mainloop()
 
-    
-    pdfpage = tk.Tk()   #window που δίνει στον χρήστη την επιλογή να κατεβάσει τα pdf ή όχι αμα υπάρχει σύνδεση στο ιντερνετ
+if download:
+    pdfpage = tk.Tk() 
     pdfpage.resizable(False,False)
     
     l1 = tk.Label(pdfpage,text = "Θέλετε να αλλάξετε το save directory των pdfs; ",font ='Arial 20',bg='white')
