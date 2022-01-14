@@ -17,7 +17,7 @@ if not os.path.exists(save_path):#(Λ) Αν το save_path δεν υπάρχει
 def download_pdf(soup):#(Δ) 
     links=soup.find_all('a',{'target':'_blank'})
     for link in links:
-        if '.pdf' in link.get_text():
+        if '.pdf' or '.PDF' in link.get_text():
             url='https://nemertes.library.upatras.gr/'+link['href']
             return url
 
