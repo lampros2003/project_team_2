@@ -107,6 +107,6 @@ def main_pages():
     except AttributeError:#(Δ)Το πρόγραμμα τελειώνει όταν δεν έχουν μείνει καθόλου στοιχεία
         print("Completed")
     except (urllib.error.URLError,urllib.error.HTTPError) as e:
-    print(e.code)    
+    print(e.code+' There was a problem with the website')    
 if download :main_pages()
 
