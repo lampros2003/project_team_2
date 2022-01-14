@@ -40,7 +40,7 @@ if download:
 # στο όνομα ή στον τίτλο ή στις λέξεις κλειδιά ή στην περίληψη ή στην ημερομηνία με αυτήν την προτεραιότητα
 def search(z):  
         z = unidecode(z)
-        result = c.execute("SELECT number,Greekname,trans_title,date,url FROM work WHERE name LIKE '%{}%'COLLATE NOCASE ".format(z)).fetchall()
+        result = c.execute("SELECT number,Greekname,Greektitle,date,url FROM work WHERE name LIKE '%{}%'COLLATE NOCASE ".format(z)).fetchall()
         result = result + c.execute("SELECT number,Greekname,Greektitle,date,url FROM work WHERE (title LIKE '%{}%' or trans_title LIKE'%{}%') and not name LIKE '%{}%' COLLATE NOCASE".format(z,z,z)).fetchall()
         result = result + c.execute("SELECT number,Greekname,Greektitle,date,url FROM work WHERE (trans_kwords LIKE'%{}%' or  kwords LIKE'%{}%') and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z)).fetchall()
         result = result + c.execute("SELECT number,Greekname,Greektitle,date,url FROM work WHERE summary LIKE '%{}%' and not trans_kwords LIKE'%{}%' and not kwords LIKE'%{}%' and not name LIKE '%{}%' and not title LIKE '%{}%' and not trans_title LIKE '%{}%' COLLATE NOCASE".format(z,z,z,z,z,z)).fetchall() 
