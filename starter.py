@@ -41,8 +41,8 @@ def renew():
     download,check = True,True
     page.destroy()
 
-if internet:   
-    page = tk.Tk()
+if internet:  
+    page = tk.Tk()       # window που δίνει στον χρήστη την επιλογή να ανανεώσει τη βάση δεδομένων ή όχι αμα υπάρχει σύνδεση στο ιντερνετ
     page.resizable(False,False)
 
     b1 = tk.Button(page,text ='renew database',font ='Arial 25',bg='blue',command = renew)
@@ -51,11 +51,9 @@ if internet:
     b2.pack(fill = 'x')
 
     page.mainloop()
-else:check()
 
-if download:
     
-    pdfpage = tk.Tk()
+    pdfpage = tk.Tk()   #window που δίνει στον χρήστη την επιλογή να κατεβάσει τα pdf ή όχι αμα υπάρχει σύνδεση στο ιντερνετ
     pdfpage.resizable(False,False)
     
     l1 = tk.Label(pdfpage,text = "Θέλετε να αλλάξετε το save directory των pdfs; ",font ='Arial 20',bg='white')
@@ -66,6 +64,7 @@ if download:
     b2.pack(fill = 'x')
     
     pdfpage.mainloop()
+else:check()
 
 
    
