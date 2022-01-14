@@ -10,28 +10,26 @@ c = con.cursor()
 
 if download:
     try:
-        c.execute('DROP TABLE work;')#διαγραφει το table εαν υπαρχει 
-        con.commit()
+        c.execute("""CREATE TABLE work (
+            number text,
+            Greekname text,
+            name text,
+            Greektitle text,
+            title text,
+            trans_title text,
+            date text,
+            kwords text,
+            trans_kwords text,
+            summary text,
+            trans_summary text,
+            url text
+            )""")#δημιουργια table με εντεκα κατηγοριες
     except:
         pass
+
+    c.execute('DELETE FROM work')
+    con.commit()
     
-    c.execute("""CREATE TABLE work (
-        number text,
-        Greekname text,
-        name text,
-        Greektitle text,
-        title text,
-        trans_title text,
-        date text,
-        kwords text,
-        trans_kwords text,
-        summary text,
-        trans_summary text,
-        url text
-        )""")#δημιουργια table με εντεκα κατηγοριες
-
-
-
     for i in range(len(x)):   #είσαγουμε τα στοιχεια απο την x στο table
         c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",(x[i].stucount,x[i].writer,unidecode(x[i].writer),x[i].title,unidecode(x[i].title),x[i].trans_title,x[i].date,unidecode(x[i].kwords),x[i].trans_kwords,unidecode(x[i].summary),x[i].trans_summary,x[i].url))
     con.commit()
