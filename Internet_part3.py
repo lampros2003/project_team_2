@@ -63,13 +63,15 @@ def secondary_pages(s):#(Δ)Συνάρτηση που μεταφέρεται μ�
         bases[i]=''
     bases['pdf']=download_pdf(soup)#(Δ)Αποθηκέυει το url του pdf
     
-    if localize_pdf:#(Λ) εαν ο χρήστης θέλει να κατεβάσει τα pdf τα κατεβάζω
-        completeName = os.path.join(save_path, str(Student.count))
-        print(completeName)
+    #if localize_pdf:#(Λ) εαν ο χρήστης θέλει να κατεβάσει τα pdf τα κατεβάζω
+    #    completeName = os.path.join(save_path, str(Student.count))
+    
         #(Λ)το συνολικό ονομα του pdf ειναι ο αριθμός του μαθητη του οποιου αποτελει διπλωματικη συνδιασμένο με το save_path
         #(Λ)τα κάνω join με το os.join για να είμαι σιγουρος οτι αποτελούν σωστό directory
             
-        download_file(bases['pdf'],completeName)#(Δ)Κατέβασμα pdf
+    #    download_file(bases['pdf'],completeName)#(Δ)Κατέβασμα pdf
+    #(Λ)SOS note η παραπάνω δομη δεν χρησημοποιειτε λογω περιορισμων του nemertes(δεν αφήνει  τη ληψη τόσο μεγάλου όγκου pdfs)
+    #αν ο περιορισμος αυτος παυσει να υπάρχει απλα βγάλτε τις γραμμες 66,67,72 απο comment
 
     return bases
 
@@ -95,6 +97,8 @@ def main_pages():
                     s='http://hdl.handle.net'+short_link
                     bases=secondary_pages(s)#(Δ)Τρέχει δευτερεύουσες σελίδες για να πάρει τις πληροφορίες από το html του hyperlink
                     x.append(Student(str(Student.count), bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
+                    if x[-1].writer == 'Τάσση, Σταυρούλα':
+                        print(x[-1])
                     #(Δ)Βάζει τα στοιχεία στην κλάση για λόγους οργάνωσης και μετά σε λίστα για χρήση από τα άλλα κομμάτια της εργασίας
                     Student.count += 1
             if counts%100==0:

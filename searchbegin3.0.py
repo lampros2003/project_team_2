@@ -28,7 +28,7 @@ class bara():
     truesearch = search
     #Τα διαφορετικά search 
     def searchbynamecall(self) :
-        self.truesearch= searchname#θέτω το truesearch (το function που εκτελέιτε ως το searchname της database)
+        self.truesearch= searchname#θέτω το truesearch  ως το searchname της database
         
     def searchbytitlecall(self):#όμοια οπως παραπάνω με search title
         self.truesearch = searchtitle
@@ -41,10 +41,10 @@ class bara():
         
         self.w.title("Αναζήτηση")#Τίτλος 
         self.draw() #δημιουργεία ui 
-    def makeorder(self):#Το χfunction ταξινόμησης 
+    def makeorder(self):#Το function ταξινόμησης 
         #άναλογα με την επιλογή του user  κανει sort βάσει αντίσοιχα κριτίρια
         if str(makeordervar.get()) == 'Παλαιότερο' :
-            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[4], '%d-%b-%Y'))
+            return sorted(self.truesearch((str(var.get()))),key = lambda x:datetime.strptime(x[3], '%d-%b-%Y'))
             #Παραπάνω περνω αυτό που επιστρέφει η search return και κάνω sort  θέτοντας όπου key
             #(key είναι αυτό βασει το οποίο γινετε η συγκριση της λίστας)  αντι για το στοιχείο x το datetime object
             # To οποίο προκειψει αφού μετατρέψω το 3 index της πλειάδας x (το self.truesearch σαφώς αποτελεί
@@ -53,7 +53,7 @@ class bara():
             
         if str(makeordervar.get()) == 'Αλφαβιτική σειρά συγγραφέα':
             return sorted((self.truesearch(str(var.get()))),key = lambda x: x[1])
-            #κανονικό sort της λιστας
+            # sort της λιστας οπου για το item x της λιστας θετω x[1]
 
             
         if str(makeordervar.get()) == 'Νεότερο':
@@ -164,6 +164,7 @@ class bara():
                 self.listbo.pack(side= TOP , fill = BOTH, expand = True)#κάνω pack to listbox
                 self.listbo.bind('<Button-3>',popemup)#κάνω bind το button3 με το popemup
                 self.scrollbar1.pack(side= RIGHT , fill= Y)    #ξανακάνω pack to σψρολλβαρ για να μείνει στην ίδια θέση
+                print(self.listbo.size())
                 
                 
             else :pass

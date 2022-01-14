@@ -10,10 +10,10 @@ download = False
 localize_pdf = False
 
 if not os.path.isfile('wheretosave.txt') :#αν δεν υπαρχει αρχειο που σώζει το Path το φτιαχνω (μονο στην πρωτη φορα θα συμβει αυτο προφανως )   
-    with open('wheretosave.txt', 'w') as f:#σωζψ το αρχικό save_directory 
+    with open('wheretosave.txt', 'w') as f:#σωζω το αρχικό save_directory 
         f.write(str('nemertespdfs'))
 else :
-    with open('wheretosave.txt', 'r') as f:#εαν το αρχείο υπαρχει διαβ΄ζω το save directory
+    with open('wheretosave.txt', 'r') as f:#εαν το αρχείο υπαρχει διαβάζω το save directory
         save_path = f.read()
      
 def check():   #ελέγχει εάν υπάρχει το database. εάν οχι δίνει warning
@@ -27,11 +27,11 @@ def check():   #ελέγχει εάν υπάρχει το database. εάν οχ�
     
 def yes():
     global localize_pdf
-    answer = messagebox.askquestion("Προσοχη!","Για να κατεβούν τα pdf χρειάζεται πολύ ώρα.Είστε σίγουροι οτι θέλετε να συνεχίσετε;")
+    answer = messagebox.askquestion("Προσοχη!","Εάν έχετε ήδη κατεβασμένα pdf και αλλαξετε το directory δεν θα μπορειτε να έχετε πρόσβαση μέσω της εφαρμογής")
     if answer == 'yes':
         global save_path
         localize_pdf = True
-        save_path = filedialog.askdirectory()#(Λαμπρος Αβουρης) Παίρνω path παο τον χρήστη  
+        save_path = filedialog.askdirectory()#(Λαμπρος Αβουρης) Παίρνω path απο τον χρήστη  
         with open('wheretosave.txt', 'w') as f:#σώζω το path σε αρχέιο
             f.write(save_path)
         pdfpage.destroy()
@@ -58,7 +58,7 @@ if download:
     pdfpage = tk.Tk()
     pdfpage.resizable(False,False)
     
-    l1 = tk.Label(pdfpage,text = "Do you want to download the pdf's?",font ='Arial 20',bg='white')
+    l1 = tk.Label(pdfpage,text = "Θέλετε να αλλάξετε το save directory των pdfs; ",font ='Arial 20',bg='white')
     l1.pack(fill = 'x')
     b1 = tk.Button(pdfpage,text ="YES",font ='Arial 25',bg='blue',command = yes)
     b1.pack(fill = 'x')
