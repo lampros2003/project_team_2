@@ -25,11 +25,10 @@ if download:
             url text
             )""")#δημιουργια table με δωδεκα κατηγοριες
     except:
-        pass
+        c.execute('DELETE FROM work') #διαγραφει τα στοιχεια απο το table
+        con.commit()
 
-    c.execute('DELETE FROM work') #διαγραφει τα στοιχεια απο το table
-    con.commit()
-    
+        
     for i in range(len(x)):   #είσαγουμε τα στοιχεια απο την x στο table
         c.execute("INSERT INTO work VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",(x[i].stucount,x[i].writer,unidecode(x[i].writer),x[i].title,unidecode(x[i].title),x[i].trans_title,x[i].date,unidecode(x[i].kwords),x[i].trans_kwords,unidecode(x[i].summary),x[i].trans_summary,x[i].url))
     con.commit()
