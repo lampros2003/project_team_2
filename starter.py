@@ -20,7 +20,7 @@ def check():   #ελέγχει εάν υπάρχει το database. εάν οχ�
     checking = os.path.isfile("work.db")
     print(save_path)
     if not checking:
-        messagebox.showinfo("ERROR","Δεν υπαρχει απθηκευμενη database",icon = 'warning')
+        messagebox.showwarning("ERROR","Δεν υπαρχει απθηκευμενη database")
         global check
         check = False
     elif internet: page.destroy()
