@@ -23,11 +23,11 @@ if download:
             summary text,
             trans_summary text,
             url text
-            )""")#δημιουργια table με εντεκα κατηγοριες
+            )""")#δημιουργια table με δωδεκα κατηγοριες
     except:
         pass
 
-    c.execute('DELETE FROM work')
+    c.execute('DELETE FROM work') #διαγραφει τα στοιχεια απο το table
     con.commit()
     
     for i in range(len(x)):   #είσαγουμε τα στοιχεια απο την x στο table
