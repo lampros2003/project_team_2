@@ -47,7 +47,7 @@ if internet:
 
     b1 = tk.Button(page,text ='renew database',font ='Arial 25',bg='blue',command = renew)
     b1.pack(fill = 'x')
-    b2 = tk.Button(page,text ='offline version',font ='Arial 25',bg='blue',command = check)
+    b2 = tk.Button(page,text ='saved version',font ='Arial 25',bg='blue',command = check)
     b2.pack(fill = 'x')
 
     page.mainloop()
