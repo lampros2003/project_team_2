@@ -164,14 +164,15 @@ class bara():
             
             self.listbo.delete(0,END)#κανω refresh το listbox
             if not str(var.get()) == '':#εαν υπάρχει κατι με βάσει το οποίο να γίνει αναζήτηση αναζητώ
-                searchreturn = self.makeorder()
-                
-                for i in searchreturn:#βάζω τα αποτελέσματα στο Listbox ως str
-                    self.listbo.insert(searchreturn.index(i),self.convertTuple(i))
-                self.listbo.pack(side= TOP , fill = BOTH, expand = True)#κάνω pack to listbox
-                self.listbo.bind('<Button-3>',popemup)#κάνω bind το button3 με το popemup
-                self.scrollbar1.pack(side= RIGHT , fill= Y)    #ξανακάνω pack to σψρολλβαρ για να μείνει στην ίδια θέση
-               
+                try:
+                    searchreturn = self.makeorder()
+                    
+                    for i in searchreturn:#βάζω τα αποτελέσματα στο Listbox ως str
+                        self.listbo.insert(searchreturn.index(i),self.convertTuple(i))
+                    self.listbo.pack(side= TOP , fill = BOTH, expand = True)#κάνω pack to listbox
+                    self.listbo.bind('<Button-3>',popemup)#κάνω bind το button3 με το popemup
+                    self.scrollbar1.pack(side= RIGHT , fill= Y)    #ξανακάνω pack to σψρολλβαρ για να μείνει στην ίδια θέση
+                except: pass
                 
                 
             else :pass
