@@ -52,7 +52,6 @@ if internet:
 
     page.mainloop()
 
-if download:
     pdfpage = tk.Tk() 
     pdfpage.resizable(False,False)
     
