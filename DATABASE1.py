@@ -8,7 +8,7 @@ from unidecode import unidecode
 con=sqlite3.connect('work.db') #συνδεόμαστε με την database
 c = con.cursor()
 
-if download:
+if download and not error:
     try:
         c.execute("""CREATE TABLE work (
             number text,
@@ -23,7 +23,7 @@ if download:
             summary text,
             trans_summary text,
             url text
-            )""")#δημιουργια table με δωδεκα κατηγοριες
+            )""")#δημιουργια table με δωδεκα κατηγοριες εάν δεν υπάρχει ήδη αλλιως δίνει σφάλμα και τρέχει το except
     except:
         c.execute('DELETE FROM work') #διαγραφει τα στοιχεια απο το table
         con.commit()
