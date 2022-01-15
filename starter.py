@@ -12,7 +12,7 @@ localize_pdf = False
 if not os.path.isfile('wheretosave.txt') :#αν δεν υπαρχει αρχειο που σώζει το Path το φτιαχνω (μονο στην πρωτη φορα θα συμβει αυτο προφανως )   
     with open('wheretosave.txt', 'w') as f:#σωζω το αρχικό save_directory 
         f.write('nemertespdfs')
-    global save_path
+    
     save_path ='nemertespdfs'
 else :
     
