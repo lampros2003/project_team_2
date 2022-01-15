@@ -6,6 +6,8 @@ timeout = 4
 try:
     request = requests.get(url, timeout = timeout)
     internet = True
+except ConnectionRefusedError:
+    print('conrefused')
 except:
     internet = False
 

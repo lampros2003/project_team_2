@@ -98,8 +98,7 @@ def main_pages():
                     s='http://hdl.handle.net'+short_link
                     bases=secondary_pages(s)#(Δ)Τρέχει δευτερεύουσες σελίδες για να πάρει τις πληροφορίες από το html του hyperlink
                     x.append(Student(str(Student.count), bases['Title:'],bases['Other Titles:'],bases['Authors:'],bases['Keywords:'],bases['Keywords (translated):'],bases['Abstract:'],bases['Abstract (translated):'],bases['pdf'],datalist[0].get_text()))
-                    if x[-1].writer == 'Τάσση, Σταυρούλα':
-                        print(x[-1])
+                    
                     #(Δ)Βάζει τα στοιχεία στην κλάση για λόγους οργάνωσης και μετά σε λίστα για χρήση από τα άλλα κομμάτια της εργασίας
                     Student.count += 1
             if counts%100==0:

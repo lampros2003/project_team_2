@@ -22,7 +22,7 @@ class bara():
         #listbox δεν έχει καλό εμφανισιακό αποτέλεσμα
         
         str = ''
-        print(tup)
+        
         for item in tup:
             str = str +'  '+ item
         return str
@@ -119,25 +119,31 @@ class bara():
         self.listbo.config(xscrollcommand = self.scrollbar2.set)
         self.scrollbar2.config(command = self.listbo.xview)#allo scrollbar για αξονα χ
         def searchweb():#το function που ψάχνει pdf στο web
-            tosearch = self.listbo.curselection()[-1]#pernv to τελευταίο (και μοναδικο στοιχείο )που έχει απιλεχθεί απο τον χρηστη
-            
-            thelink = self.listbo.get(tosearch).split(' ')[-1]# παιρνω το pdf απο τo listbox κανοντας του split και πρνοντας το τελευταιο item
-            
-            webbrowser.open(thelink)#ψάχνω στο διαδίκτυο για το λινκ του pdf
+            try : 
+                tosearch = self.listbo.curselection()[-1]#pernv to τελευταίο (και μοναδικο στοιχείο )που έχει απιλεχθεί απο τον χρηστη
+                
+                thelink = self.listbo.get(tosearch).split(' ')[-1]# παιρνω το pdf απο τo listbox κανοντας του split και πρνοντας το τελευταιο item
+                
+                webbrowser.open(thelink)#ψάχνω στο διαδίκτυο για το λινκ του pdf
+            except: print('Επιλέξτε ένα απο τα αποτελέσματα με δεξί κλικ')
 
         def searchlocal():#function που ψάχνει το αρχίο στο savepath 
-            tosearch = self.listbo.curselection()[-1]
-            
-            thenum = os.path.join(save_path,self.listbo.get(tosearch).split('  ')[1] )#παιρνω τον αριθμό του μαθητη
-            # μετα δημιουργώ το path που θα είχε ο αριθμός αυτος αν ηταν κατεβασμενο το pdf
-            subprocess.Popen( thenum + '.pdf' ,shell=True)#ψάχνω και ανοίγω το pdf μέσω της process  popen
+            try:   
+                tosearch = self.listbo.curselection()[-1]
+                
+                thenum = os.path.join(save_path,self.listbo.get(tosearch).split('  ')[2] )#παιρνω το όνομα του μαθητη
+                # μετα δημιουργώ το path που θα είχε ο αριθμός αυτος αν ηταν κατεβασμενο το pdf
+                subprocess.Popen( thenum + '.pdf' ,shell=True)#ψάχνω και ανοίγω το pdf μέσω της process  popen
+            except: print('Επιλέξτε ένα απο τα αποτελέσματα με δεξί κλικ')
         def downloadspecific():
-            tosearch = self.listbo.curselection()[-1]
-            dlpath = os.path.join(save_path, self.listbo.get(tosearch).split('  ')[1])
-            filurl = self.listbo.get(tosearch).split('  ')[-1]
-            #και το λινκ fileurl και το complete directory του αρχείου dlpath
-            download_file(filurl,dlpath)
-            #κατεβάζω το αρχείο στο dlpath
+            try:
+                tosearch = self.listbo.curselection()[-1]
+                dlpath = os.path.join(save_path, self.listbo.get(tosearch).split('  ')[2])
+                filurl = self.listbo.get(tosearch).split('  ')[-1]
+                #και το λινκ fileurl και το complete directory του αρχείου dlpath
+                download_file(filurl,dlpath)
+                #κατεβάζω το αρχείο στο dlpath
+            except: print('Επιλέξτε ένα απο τα αποτελέσματα με δεξί κλικ')
 
         
 
@@ -161,11 +167,11 @@ class bara():
                 searchreturn = self.makeorder()
                 
                 for i in searchreturn:#βάζω τα αποτελέσματα στο Listbox ως str
-                    self.listbo.insert(searchreturn.index(i),i)
+                    self.listbo.insert(searchreturn.index(i),self.convertTuple(i))
                 self.listbo.pack(side= TOP , fill = BOTH, expand = True)#κάνω pack to listbox
                 self.listbo.bind('<Button-3>',popemup)#κάνω bind το button3 με το popemup
                 self.scrollbar1.pack(side= RIGHT , fill= Y)    #ξανακάνω pack to σψρολλβαρ για να μείνει στην ίδια θέση
-                print(self.listbo.size())
+               
                 
                 
             else :pass

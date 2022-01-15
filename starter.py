@@ -4,21 +4,24 @@ import sys
 from tkinter import messagebox
 from askhsh import *
 from tkinter import filedialog
-global save_path
+
 
 download = False
 localize_pdf = False
 
 if not os.path.isfile('wheretosave.txt') :#αν δεν υπαρχει αρχειο που σώζει το Path το φτιαχνω (μονο στην πρωτη φορα θα συμβει αυτο προφανως )   
     with open('wheretosave.txt', 'w') as f:#σωζω το αρχικό save_directory 
-        f.write(str('nemertespdfs'))
+        f.write('nemertespdfs')
+    global save_path
+    save_path ='nemertespdfs'
 else :
+    
     with open('wheretosave.txt', 'r') as f:#εαν το αρχείο υπαρχει διαβάζω το save directory
         save_path = f.read()
      
 def check():   #ελέγχει εάν υπάρχει το database. εάν οχι δίνει warning
     checking = os.path.isfile("work.db")
-    print(save_path)
+    
     if not checking:
         messagebox.showwarning("ERROR","Δεν υπαρχει απθηκευμενη database")
         global check
