@@ -5,7 +5,7 @@ from tkinter import messagebox
 from askhsh import *
 from tkinter import filedialog
 
-
+check = False
 download = False
 localize_pdf = False
 
